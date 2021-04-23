@@ -16,7 +16,6 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
       - "dbdata:/var/lib/mongodb/data"
-      - "./api/db/seed.js:/docker-entrypoint-initdb.d/seed.js:ro"
 volumes:
   dbdata:
 
