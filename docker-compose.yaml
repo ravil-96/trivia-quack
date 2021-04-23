@@ -1,3 +1,4 @@
+
 version: '3'
 services:
   api:
@@ -9,8 +10,13 @@ services:
         target: /code
 
   db:
-    image: postgres:12.4
+    image: mongo:latest
     environment: 
-      - POSTGRES_USER=user
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
-      - "./db/migrations:/docker-entrypoint-initdb.d/:ro"
+      - "dbdata:/var/lib/mongodb/data"
+      - "./api/db/seed.js:/docker-entrypoint-initdb.d/seed.js:ro"
+volumes:
+  dbdata:
+
