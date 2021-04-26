@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 const NewGame = () => {
     const history = useHistory();
 
-    const createRoom = () => {
+    const createRoom = async () => {
         try {
             let { data } = await axios.post("http.localhost:3000/games");
             console.log(data);
