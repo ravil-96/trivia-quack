@@ -9,7 +9,7 @@ const NewGame = () => {
     //     try {
     //         let { data } = await axios.post("http://localhost:3000/games");
     //         console.log(data);
-    //         history.push(`/game/${data.id}`)     
+    //         history.push(`/game/${data}`)     
     //     } catch (err) {
     //         console.warn(err);
     //     }
