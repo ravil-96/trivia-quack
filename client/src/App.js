@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
-import { Homepage } from './pages';
+import { Homepage, Lobby, Create } from './pages';
 
 const App = () => {
     return (
@@ -8,6 +8,12 @@ const App = () => {
             <Switch>
                 <Route exact path="/">
                     <Homepage />
+                </Route>
+                <Route path="/create">
+                    <Create />
+                </Route>
+                <Route path="/lobby">
+                    <Lobby />
                 </Route>
             </Switch>
         </>
