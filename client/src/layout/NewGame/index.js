@@ -15,7 +15,7 @@ const NewGame = () => {
         }
     }
 
-    return <button onClick={createRoom}>New Game</button>
+    return <button onClick={createRoom} style={{backgroundColor: "transparent", borderStyle: "none", color: "white"}}>New Game</button>
 }
 
 export default NewGame;
