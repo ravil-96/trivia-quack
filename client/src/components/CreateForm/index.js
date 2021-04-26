@@ -5,7 +5,7 @@ import { NewGame } from '../../layout';
 const CreateForm = () => {
   return (
     <form>
-      <NewGame />
+      
     </form>
   );
 }
