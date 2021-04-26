@@ -12,8 +12,6 @@ function Options () {
       <button>Option3</button>
       <button>Option4</button>
     </>  
-    
-
 
   )
 
