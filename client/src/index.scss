@@ -1,1 +1,6 @@
+@import './variables';
 @import './pages/Homepage/homepage';
+
+body {
+  background-color: $background-color;
+}
