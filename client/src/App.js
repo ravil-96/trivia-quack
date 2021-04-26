@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
-import { Homepage, Lobby, Create } from './pages';
+import { Homepage, Lobby, Create, Result } from './pages';
 
 const App = () => {
     return (
@@ -14,6 +14,9 @@ const App = () => {
                 </Route>
                 <Route path="/lobby">
                     <Lobby />
+                </Route>
+                <Route path="/result/:id">
+                    <Result />
                 </Route>
             </Switch>
         </>
