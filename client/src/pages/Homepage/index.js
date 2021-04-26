@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { NewGame, JoinGame } from '../../layout';
+
 const Homepage = () => {
   return (
     <main id="homepage" className="container">
@@ -7,8 +9,8 @@ const Homepage = () => {
       <img className="planet-left" src="../../images/planet-1.png" alt="Blue Planet" />
       <img className="planet-right" src="../../images/planet-2.png" alt="Orange Planet" />
       <div className="text-center">
-      <a className="new-game-button">New Game</a>
-      <a className="join-game-button">Join Game</a>
+      <a className="new-game-button"><NewGame /></a>
+      <a className="join-game-button"><JoinGame /></a>
       </div>
     </main>
   );
