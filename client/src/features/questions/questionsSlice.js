@@ -24,5 +24,7 @@ export default function questionsReducer(state=initialState, action) {
                     option4: action.payload
                 }
             ]
+        default:
+            return state
     }
 }

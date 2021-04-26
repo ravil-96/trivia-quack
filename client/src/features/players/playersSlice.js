@@ -13,7 +13,7 @@ function nextPlayerId(players) {
 
 export default function playersReducer(state = initialState, action) {
     switch (action.type) {
-        case 'game/playerAdded': {
+        case 'players/playerAdded': {
             return [
                 ...state,
                 {

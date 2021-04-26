@@ -15,5 +15,7 @@ export default function answersReducer(state = initialState, action){
                     response: action.payload
                 }
             ]
+        default:
+            return state
     }
 }
