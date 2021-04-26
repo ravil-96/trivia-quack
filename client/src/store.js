@@ -5,6 +5,4 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducer'
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
-// add logic for automatic assignment of player ids
-
 export default store;
