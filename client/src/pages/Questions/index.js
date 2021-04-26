@@ -13,7 +13,17 @@ function questionPage () {
   const option4 = useSelector(state => state.option4)
 
   dispatch({type:'answers/answerSelected', payload: option})
+  // Add action
 
+  return (
+    <>
+      <h2> 
+        Question {questionNumber}
+      </h2>
+      <h1> {questionTitle} </h1>
+      <Options/> 
+    </>
+  )
 }
 
 
