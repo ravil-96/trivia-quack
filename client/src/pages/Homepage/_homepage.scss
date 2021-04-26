@@ -1,0 +1,79 @@
+.logo-img {
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.planet-left {
+  width: 25%;
+  position: absolute;
+  left: -7.5%;
+  bottom: -7.5%;
+  animation: float 6s ease-in-out 2s infinite;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.planet-right {
+  width: 25%;
+  position: absolute;
+  right: -7.5%;
+  bottom: -7.5%;
+  animation: float 6s ease-in-out infinite;
+
+  @media (max-width: 768px) {
+    display: block;
+    text-align: center;
+    width: 75%;
+    left: 12.5%;
+    right: auto;
+    bottom: -200px;
+    z-index: -1;
+  }
+}
+
+#homepage {
+  
+  color: white;
+  margin-top: 100px;
+
+  a {
+    font-size: 2rem;
+    color: white;
+    padding:1rem;
+    margin: 10px 0;
+    text-align: center;
+    display: inline-block;
+    width: 80%;
+    transition: width 0.5s ease;
+    border-radius: 100px;
+  }
+
+  a:hover {
+    text-decoration: none;
+    width: 100%;
+  }
+}
+
+.new-game-button {
+  background: $new-game-button-bck;
+  background: $new-game-gradient;
+}
+
+.join-game-button {
+  background: $join-game-button-bck;
+  background: $join-game-gradient;
+}
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
