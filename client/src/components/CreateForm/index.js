@@ -16,45 +16,36 @@ const CreateForm = () => {
     setShowOption3(true);
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault(e);
+    console.log(e);
+  }
+
   return (
-    <form className="text-center">
-      { showOption1 ?
-        <div id="option-1">
-            <label for="category">Select a Category for your quiz:</label>
-            <select name="category" id="category">
-              <option value="9">General Knowledge</option>
-              <option value="21">Sports</option>
-              <option value="26">Celebrities</option>
-            </select>
-            <div className="test-wrap">
-              <a className="next-button" onClick={switchOption2}>Next</a>
-            </div>
-        </div>
-          :
-        <></>
-      }
-      { showOption2 ?
-        <div id="option-2">
-          <label for="amount">Number of questions (3-25): </label>
-          <input type="number" id="amount" name="amount" min="3" max="25"></input>
-          <a className="next-button" onClick={switchOption3}>Next</a>
-        </div>
-          :
-        <></>
-      }
-      { showOption3 ?
-        <div id="option-3">
-          <label for="difficulty">Enter the difficulty:</label>
-          <select name="difficulty" id="difficulty">
-            <option value="easy">Easy</option>
-            <option value="medium">Difficult</option>
-            <option value="hard">Hard</option>
+    <form className="text-center" onSubmit={handleSubmit}>
+      <div id="option-1" className={ showOption1 ? "" : "d-none"}>
+          <label for="category">Select a Category for your quiz:</label>
+          <select name="category" id="category">
+            <option value="9">General Knowledge</option>
+            <option value="21">Sports</option>
+            <option value="26">Celebrities</option>
           </select>
-          <input type="submit" value="Submit"/>
-        </div>
-          :
-        <></>
-      }
+          <a className="next-button" onClick={switchOption2}>Next</a>
+      </div>
+      <div id="option-2" className={ showOption2 ? "" : "d-none"}>
+        <label for="amount">Number of questions (3-25): </label>
+        <input type="number" id="amount" name="amount" min="3" max="25" />
+        <a className="next-button" onClick={switchOption3}>Next</a>
+      </div>
+      <div id="option-3" className={ showOption3 ? "" : "d-none"}>
+        <label for="difficulty">Enter the difficulty:</label>
+        <select name="difficulty" id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Difficult</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      <input type="submit" value="Submit" className={ showOption3 ? "" : "d-none"}/>
     </form>
   );
 }

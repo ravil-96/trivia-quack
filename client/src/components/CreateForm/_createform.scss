@@ -43,7 +43,8 @@ form {
     font-size: 1.5rem;
   }
 
-  a {
+  a,
+  input[type=submit]  {
     display: block;
     text-align: center;
     padding: 12.5px 0;
@@ -56,6 +57,7 @@ form {
     margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
+    border: 0;
   }
 
   a:hover {
@@ -65,5 +67,6 @@ form {
   @media (max-width: 768px) {
     margin-left: -45vw;
     width: 90vw;
+    height: auto;
   }
 }
