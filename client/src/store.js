@@ -2,7 +2,9 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import reducer from './reducers'
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
+import rootReducer from './reducer'
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+
+// add logic for automatic assignment of player ids
 
 export default store;
