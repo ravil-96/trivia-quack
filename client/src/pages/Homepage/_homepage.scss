@@ -11,3 +11,36 @@
   right: -7.5%;
   bottom: -7.5%;
 }
+
+#homepage {
+  
+  color: white;
+  margin-top: 100px;
+
+  a {
+    color: white;
+    padding:1rem;
+    margin: 10px 11%;
+    text-align: center;
+    display: inline-block;
+    width: 40%;
+    transition: width 0.5s ease;
+  }
+
+  a:hover {
+    text-decoration: none;
+    width: 50%;
+  }
+}
+
+.new-game-button {
+  background: $new-game-button-bck;
+  background: $new-game-gradient;
+  border-radius: 25px;
+}
+
+.join-game-button {
+  background: $join-game-button-bck;
+  background: $join-game-gradient;
+  border-radius: 25px;
+}
