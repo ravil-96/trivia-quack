@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CreateForm = () => {
+const CreateForm = ({ createRoom }) => {
 
   const [showOption1, setShowOption1] = useState(true);
   const [showOption2, setShowOption2] = useState(false);
@@ -19,6 +19,7 @@ const CreateForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault(e);
     console.log(e);
+    createRoom();
   }
 
   return (
