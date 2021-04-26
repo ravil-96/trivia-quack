@@ -25,10 +25,11 @@
   @media (max-width: 768px) {
     display: block;
     text-align: center;
-    width: 100%;
-    left: 0;
+    width: 75%;
+    left: 12.5%;
     right: auto;
     bottom: -200px;
+    z-index: -1;
   }
 }
 
