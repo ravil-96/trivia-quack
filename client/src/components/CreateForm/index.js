@@ -17,7 +17,7 @@ const CreateForm = () => {
   }
 
   return (
-    <form>
+    <form className="text-center">
       { showOption1 ?
         <div id="option-1">
             <label for="category">Select a Category for your quiz:</label>
@@ -26,7 +26,9 @@ const CreateForm = () => {
               <option value="21">Sports</option>
               <option value="26">Celebrities</option>
             </select>
-            <a className="next-button" onClick={switchOption2}>Next</a>
+            <div className="test-wrap">
+              <a className="next-button" onClick={switchOption2}>Next</a>
+            </div>
         </div>
           :
         <></>
@@ -48,7 +50,7 @@ const CreateForm = () => {
             <option value="medium">Difficult</option>
             <option value="hard">Hard</option>
           </select>
-          <button>Submit</button>
+          <input type="submit" value="Submit"/>
         </div>
           :
         <></>
