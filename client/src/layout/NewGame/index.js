@@ -9,7 +9,7 @@ const NewGame = () => {
         try {
             let { data } = await axios.post("http.localhost:3000/games");
             console.log(data);
-            // history.push(`new room url path`)     
+            history.push(`/game/${data.data.insertedId}`)     
         } catch (err) {
             console.warn(err);
         }
