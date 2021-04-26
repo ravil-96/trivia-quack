@@ -8,7 +8,11 @@
   position: absolute;
   left: -7.5%;
   bottom: -7.5%;
-  animation: float 6s ease-in-out infinite;
+  animation: float 6s ease-in-out 2s infinite;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .planet-right {
@@ -17,6 +21,15 @@
   right: -7.5%;
   bottom: -7.5%;
   animation: float 6s ease-in-out infinite;
+
+  @media (max-width: 768px) {
+    display: block;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    right: auto;
+    bottom: -200px;
+  }
 }
 
 #homepage {
