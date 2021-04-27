@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { playerReady } from '../../actions'
+import { playerReady, addAnswer } from '../../actions'
 import { useSelector, useDispatch } from 'react-redux'
 import io from 'socket.io-client';
 
@@ -11,9 +11,9 @@ function Options ({options}) {
   const socket = useSelector(state => state.myReducer.socket)
   const [selectedOption, setSelectedOption] = useState(null)
 
-  const renderOptions = options.map(option => {
+  const renderOptions = options.map((option, index) => {
     return (
-      <button style={{background: selectedOption === option ? 'green' : null}} onClick={() => handleSelect(option)}>{option}</button>
+      <button key={index} style={{background: selectedOption === option ? 'green' : null}} onClick={() => handleSelect(option)}>{option}</button>
     )
   })
 
@@ -24,6 +24,7 @@ function Options ({options}) {
 
   const handleSubmit = () => {
         socket.socket.emit("ready", socket.socket.id)
+        dispatch(addAnswer(selectedOption))
     }
 
   useEffect(() => {

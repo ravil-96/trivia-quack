@@ -10,13 +10,13 @@ import icon9 from '../../images/player-9.png';
 import icon10 from '../../images/player-10.png';
 
 import React, { useState, useEffect } from'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 import axios from 'axios';
 
 import { PlayerCard, Options } from '../../components'
-import { getAnswers } from '../../actions'
+import { getAnswers, allNotReady } from '../../actions'
 
 
 import { playerReady } from '../../actions'
@@ -24,18 +24,35 @@ import { playerReady } from '../../actions'
 
 const GameRoom = () => {
   const { id } = useParams()
+  const history = useHistory()
   const dispatch = useDispatch()
 
   const currentPlayers = useSelector(state => state.myReducer.players)
   const socket = useSelector(state => state.myReducer.socket)
   const questions = useSelector(state => state.myReducer.questions)
-  
-  
+  const answers = useSelector(state => state.myReducer.answers)
+
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+
     useEffect(() => {
         dispatch(getAnswers(id))
-
-
     }, []);
+
+    useEffect(() => {
+      if (currentPlayers.length > 0 && currentPlayers.every(player => player.ready === true)) {
+        if (currentQuestion < questions.length-1) {
+          dispatch(allNotReady())
+          setCurrentQuestion(q => q + 1)
+        } else {
+          axios({
+            method: 'post',
+            url: `http://localhost:3000/games/${id}/players/${socket.socket.id}/answers`,
+            data: answers
+          });
+          history.push(`/results/${id}`)
+        }
+      }
+    },[currentPlayers])
 
     const icons = [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10];
 
@@ -46,11 +63,11 @@ const GameRoom = () => {
   
     const readyMarker = false;
   
-    const returnPlayer = currentPlayers.map(player => {
+    const returnPlayer = currentPlayers.map((player, index) => {
         return (
         <>
         <div>{JSON.stringify(player.ready)}</div>
-        <PlayerCard player={player.player} me={player.player === socket.socket.id} icon={returnIcon()} ready={player.ready} />
+        <PlayerCard key={index} player={player.player} me={player.player === socket.socket.id} icon={returnIcon()} ready={player.ready} />
         </>
         )
     });
@@ -60,7 +77,7 @@ const GameRoom = () => {
       <section style={{ color: "white" }} id="game-room">
         <div id="App">Room: {id}</div>
         { questions ? <>
-        <Options options={questions[0].possible_answers}/>
+        <Options options={questions[currentQuestion].possible_answers}/>
         {returnPlayer}</> : null }
       </section>
     );

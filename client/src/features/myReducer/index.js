@@ -1,4 +1,4 @@
-function myReducer (state = {players: []}, action) {
+function myReducer (state = {players: [], answers: []}, action) {
     switch (action.type) {
       case 'ADD_SOCKET':
         return ({
@@ -29,7 +29,12 @@ function myReducer (state = {players: []}, action) {
       case 'LOAD_QUESTIONS':
         return ({
           ...state,
-          questions:[...action.payload]})        
+          questions:[...action.payload]}) 
+      case 'ADD_ANSWER':
+        return ({
+          ...state,
+          answers: state.answers.concat([action.payload])
+        })
       case 'SET_ERROR' :
         return 'error'
       case 'ADD_MESSAGE':
