@@ -12,19 +12,8 @@ export const getQuestion = (id) => {
               let opt2 = question1['possible_answers'][1]
               let opt3 = question1['possible_answers'][2]
               let opt4 = question1['possible_answers'][3]
-              console.log(`what is this? ${question1}`);
-              console.log(question);
-              console.log(opt1);
-              console.log(opt2);
-              console.log(opt3);
-              console.log(opt4);
-              const info = { 
-                question: questionTitle, 
-                option1: opt1, 
-                option2: opt2, 
-                option3: opt3, 
-                option4: opt4
-              }
+              let possAnswers = [opt1, opt2, opt3, opt4]
+              const info = { questionTitle, possAnswers }
               console.log(info);
               dispatch(questionInfo(info))
           } catch (err){
