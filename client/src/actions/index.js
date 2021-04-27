@@ -5,35 +5,22 @@ import { useParams } from 'react-router-dom'
 // export const addUser = newUser => ({ type: 'ADD_USER', payload: newUser })
 export const addMessage = ( user, message ) => ({ type: 'ADD_MESSAGE', payload: {user, message} })
 
-export const loadOption = option => {
-    return {
-        type: 'answers/answerSubmitted',
-        payload: option
-    }
-}
-
-export const getOptions = id => {
-    return async dispatch => {
-        try { 
-            const { data } = await axios.get(`http://localhost:8080/games/${id}`)
-            let options = data.questions.map(q => q['possible_answers'] )
-            console.log(options)
-        dispatch(loadOption(options))
-        } catch {
-
+export const getAnswers = gameId => {
+    return async (dispatch) => {
+        try {
+            const res = await fetch(`http://localhost:3000/games/${gameId}`)
+            const data = await res.json()
+            let newQuestions = data.questions.map(question => question)
+            console.log(newQuestions)
+            dispatch({
+                type: 'LOAD_QUESTIONS',
+                payload: newQuestions
+            })
+        } catch (err) {
+            dispatch({
+                type: 'SET_ERROR',
+                payload: err
+            })
         }
     }
 }
-
-// Helpers
-const fetchOptions = async () => {
-     const { id } = useParams()
-     try {
-        if (data.status === 404) { throw Error } 
-        console.log(data)
-        return data.questions.possible_answers
-     } catch(err) {
-         throw new Error(err.message)
-     }
-}
-

@@ -1,7 +1,14 @@
-function myReducer (state = [{user: 'admin', message: 'welcome!'}], action) {
+function myReducer (state = [], action) {
     switch (action.type) {
+      case 'LOAD_QUESTIONS':
+        return ([
+            ...action.payload             
+        ])
+      case 'SET_ERROR' :
+        return 'error'
       case 'ADD_MESSAGE':
-        return state.concat([action.payload])
+        console.log(action.payload)
+        return state
       default:
         return state
     }

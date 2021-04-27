@@ -1,7 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
-import { GameRoom } from './layout';
-import { Homepage, Lobby, Create, Result, Questions, Highscore } from './pages';
+import { Homepage, Lobby, Create, Result, Questions, Highscore, GameRoom } from './pages';
 
 const App = () => {
     return (

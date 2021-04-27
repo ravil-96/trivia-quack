@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 import axios from 'axios';
 
+import { getAnswers } from '../../actions'
+
 /* ***************************************
 // Import redux and components below ...
 
@@ -28,27 +30,13 @@ const GameRoom = () => {
   
     const [count, setCount] = useState(0)
   
-    const messages = useSelector(state => state.myReducer)
+    const questions = useSelector(state => state.myReducer)
     const dispatch = useDispatch()
   
-    useEffect(() => {
-      async function validRoom() {
-        try {
-          setLoading(true)
-          let { data } = await axios.get(`http://localhost:3000/games/${id}`);
-          setLoading(false)
-          setRoom(data)
-        } catch (err) {
-          console.warn(err);
-          setLoading(false)
-          setError(err);
-        }
-      }
-      validRoom();
-    }, []);
   
     useEffect(() => {
-      if (room) {
+        dispatch(getAnswers(id))
+
         const socket = io(serverEndpoint);
         setSocket({ socket });
         socket.emit("create", id);
@@ -67,9 +55,7 @@ const GameRoom = () => {
         return () => {
           socket.disconnect();
         };
-      } else {
-      }
-    }, [room]);
+    }, []);
   
   
     const sendMessage = (event, { message, setMessage }) => {
@@ -80,16 +66,17 @@ const GameRoom = () => {
   
 
     return (
-        <section id="game-room">
+        <section style={{color: 'white'}} id="game-room">
              <div id="App">Room: {id}</div>
              <span>users: {count}</span>
+             <span>{JSON.stringify(questions)}</span>
             {/* { loading ? 
                 (<div>loading...</div>) : 
                 error ? (<div>{JSON.stringify(error)}</div>
       ) : (
       <Chat messages={messages} sendMessage={sendMessage} />
       )} */}
-          <Options id={id}/>
+          {/* <Options id={id}/> */}
         </section>
     )
 
