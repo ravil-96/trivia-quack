@@ -64,12 +64,7 @@ const GameRoom = () => {
     const readyMarker = false;
   
     const returnPlayer = currentPlayers.map((player, index) => {
-        return (
-        <>
-        <div>{JSON.stringify(player.ready)}</div>
-        <PlayerCard key={index} player={player.player} me={player.player === socket.socket.id} icon={returnIcon()} ready={player.ready} />
-        </>
-        )
+        return <PlayerCard key={index} player={player.player} me={player.player === socket.socket.id} icon={returnIcon()} ready={player.ready} />
     });
   
 
@@ -77,6 +72,8 @@ const GameRoom = () => {
       <section style={{ color: "white" }} id="game-room">
         <div id="App">Room: {id}</div>
         { questions ? <>
+          <p>{questions[0].category} - {currentQuestion+1}/{questions.length}</p>
+         <p>{questions[currentQuestion].question}</p>
         <Options options={questions[currentQuestion].possible_answers}/>
         {returnPlayer}</> : null }
       </section>

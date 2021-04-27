@@ -74,12 +74,7 @@ const Lobby = () => {
   const readyMarker = false;
 
   const returnPlayer = currentPlayers.map(player => {
-      return (
-      <>
-      <div>{JSON.stringify(player.ready)}</div>
-      <PlayerCard player={player.player} me={player.player === socket.socket.id} icon={returnIcon()} ready={player.ready} />
-      </>
-      )
+      return <PlayerCard player={player.player} me={player.player === socket.socket.id} icon={returnIcon()} ready={player.ready} />
   });
 
   return (

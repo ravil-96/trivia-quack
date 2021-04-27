@@ -36,7 +36,6 @@ function Options ({options}) {
 
   return (
     <>
-      <p>Hello</p>
       {renderOptions}
       <button type='submit' onClick={handleSubmit}>Submit</button>
     </>  
