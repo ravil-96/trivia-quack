@@ -7,9 +7,12 @@
 @import './pages/Homepage/homepage';
 @import './pages/Lobby/lobby';
 @import './pages/Create/create';
+@import './pages/Highscore/highscore';
 
 // Components
 @import './components/CreateForm/createform';
+@import './components/PlayerCard/playercard';
+@import './components/ScoreView/scoreview';
 
 body {
   background-color: $background-color;
