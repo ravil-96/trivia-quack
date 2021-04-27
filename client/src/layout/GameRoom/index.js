@@ -28,7 +28,7 @@ const GameRoom = () => {
   
     const [count, setCount] = useState(0)
   
-    const messages = useSelector(state => state)
+    const messages = useSelector(state => state.myReducer)
     const dispatch = useDispatch()
   
     useEffect(() => {
