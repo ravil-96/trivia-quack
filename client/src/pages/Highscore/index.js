@@ -30,6 +30,31 @@ const players = [
     player: "125",
     icon: icon3,
     score: "85%",
+  },
+  {
+    player: "125",
+    icon: icon3,
+    score: "85%",
+  },
+  {
+    player: "125",
+    icon: icon3,
+    score: "85%",
+  },
+  {
+    player: "125",
+    icon: icon3,
+    score: "85%",
+  },
+  {
+    player: "125",
+    icon: icon3,
+    score: "85%",
+  },
+  {
+    player: "125",
+    icon: icon3,
+    score: "85%",
   }
 ]
 

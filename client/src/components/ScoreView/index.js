@@ -1,6 +1,20 @@
 import React from 'react';
 
 const ScoreView = ({players}) => {
+
+  const generateTable = players.map((player, index) => {
+    if (index >= 3) {
+      return (
+        <div class="table-place">
+          <img src={player.icon} alt="Player Icon" />
+          <span>{index + 1}</span>
+          <h5>Guest-{player.player}</h5>
+          <p>{player.score}</p>
+        </div>
+      );
+    }
+  });
+
   return (
     <div className="scoreview text-center">
       <div class="row">
@@ -35,6 +49,7 @@ const ScoreView = ({players}) => {
           <></>
         }
       </div>
+      { generateTable }
     </div>
   )
 }
