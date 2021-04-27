@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 import { CreateForm } from '../../components';
+import { GameRoom } from '../../layout';
 
 const Lobby = () => {
   const history = useHistory();

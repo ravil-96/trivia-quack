@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
 import { Homepage, Lobby, Create, Result } from './pages';
-
+import { GameRoom } from './layout';
 const App = () => {
     return (
         <>
@@ -14,6 +14,9 @@ const App = () => {
                 </Route>
                 <Route path="/lobby">
                     <Lobby />
+                </Route>
+                <Route path="/game/:id">
+                    <GameRoom />
                 </Route>
                 <Route path="/result/:id">
                     <Result />
