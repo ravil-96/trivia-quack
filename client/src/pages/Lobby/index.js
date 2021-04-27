@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { PlayerCard } from '../../components';
 import io from 'socket.io-client';
+import axios from 'axios'
 
 import { addPlayer, playerReady } from '../../actions'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 
 import icon1 from '../../images/player-1.png';
 import icon2 from '../../images/player-2.png';
@@ -22,9 +23,11 @@ const Lobby = () => {
   const [socket, setSocket] = useState(null);
 
   const { id } = useParams()
+  const history = useHistory()
   console.log(id)
   const dispatch = useDispatch()
   const serverEndpoint = "http://localhost:3000"
+  const currentPlayers = useSelector(state => state.myReducer.players)
 
 
   useEffect(() => {
@@ -43,13 +46,18 @@ const Lobby = () => {
 
   },[])
 
+  useEffect(() => {
+    if (currentPlayers.length > 0 && currentPlayers.every(player => player.ready === true)) {
+      axios.post(`http://localhost:3000/games/${id}/players/${socket.socket.id}`)
+      history.push(`/game/${id}`)
+    }
+  },[currentPlayers])
+
   function handleReady(){
     socket.socket.emit("ready", socket.socket.id)
   }
 
   // const fakePlayers = ["123123", "213424", "234234", "234345"];
-
-  const currentPlayers = useSelector(state => state.myReducer.players)
   
   const icons = [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10];
 
