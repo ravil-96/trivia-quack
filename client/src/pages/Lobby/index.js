@@ -22,14 +22,24 @@ const Lobby = () => {
     return icon;
   }
 
+  const readyMarker = false;
+
   const returnPlayer = fakePlayers.map(player => {
       console.log("TEST")
-      return <PlayerCard player={player} icon={returnIcon()} />
-    })
+      return <PlayerCard player={player} icon={returnIcon()} ready={false} />
+  });
 
   return (
     <main id="lobby" className="container">
-      { returnPlayer }
+      <div class="row">
+        <div class="col-md-6 text-center align-self-center">
+          <a className="ready-button">Ready Up</a>
+        </div>
+        <div class="col-md-6">
+          <h3>Player List:</h3>
+          { returnPlayer }
+        </div>
+      </div>
     </main>
   );
 };
