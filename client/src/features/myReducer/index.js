@@ -1,4 +1,4 @@
-export default function myReducer (state = [{user: 'admin', message: 'welcome!'}], action) {
+function myReducer (state = [{user: 'admin', message: 'welcome!'}], action) {
     switch (action.type) {
       case 'ADD_MESSAGE':
         return state.concat([action.payload])
@@ -6,3 +6,5 @@ export default function myReducer (state = [{user: 'admin', message: 'welcome!'}
         return state
     }
   };
+
+export default myReducer
