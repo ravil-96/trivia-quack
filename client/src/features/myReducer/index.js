@@ -19,6 +19,13 @@ function myReducer (state = {players: []}, action) {
                 ...state.players.slice(likeIdx+1)
             ]
             return { ...state, players: updatedPlayers }
+            case 'ALL_NOT_READY':
+              const unReadyPlayers = [ 
+                ...state.players.map(p => ({player: p.player, ready: false}))
+              ]
+              return {
+                ...state, players: unReadyPlayers 
+              }
       case 'LOAD_QUESTIONS':
         return ({
           ...state,

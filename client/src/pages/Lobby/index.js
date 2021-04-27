@@ -3,7 +3,7 @@ import { PlayerCard } from '../../components';
 import io from 'socket.io-client';
 import axios from 'axios'
 
-import { addPlayer, playerReady, addSocket } from '../../actions'
+import { addPlayer, playerReady, addSocket, allNotReady } from '../../actions'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
@@ -54,6 +54,7 @@ const Lobby = () => {
     if (currentPlayers.length > 0 && currentPlayers.every(player => player.ready === true)) {
       axios.post(`http://localhost:3000/games/${id}/players/${socket.socket.id}`)
       history.push(`/game/${id}`)
+      dispatch(allNotReady())
     }
   },[currentPlayers])
 

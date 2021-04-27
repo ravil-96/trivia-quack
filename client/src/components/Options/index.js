@@ -1,45 +1,45 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {getQuestion} from '../../actions/questionActions';
+import React, {useEffect, useState} from 'react';
+import { playerReady } from '../../actions'
+import { useSelector, useDispatch } from 'react-redux'
+import io from 'socket.io-client';
 
-function Options ({id}) {
-  const dispatch = useDispatch();
-// 1. The user clicks on a button and it is highlighted
-// 2. The user submits an answer
-  dispatch(getQuestion(id))
+const serverEndpoint = "http://localhost:3000"
+
   
-  const question = useSelector(state => state.questions.questionTitle)
-  const options = useSelector(state => state.questions.options)
+function Options ({options}) {
+  const dispatch = useDispatch()
+  const socket = useSelector(state => state.myReducer.socket)
+  const [selectedOption, setSelectedOption] = useState(null)
 
   const renderOptions = options.map(option => {
     return (
-      <button onClick={handleSelect} value={option}>{option}</button>
+      <button style={{background: selectedOption === option ? 'green' : null}} onClick={() => handleSelect(option)}>{option}</button>
     )
   })
 
-
-  const [selectedOption, setSelectedOption] = useState();
   
-  const handleSelect = e => {
-        const input = e.target.value
-        setSelectedOption(input)
-        console.log(input)
+  const handleSelect = (option) => {
+        setSelectedOption(option)
     }
 
-  const handleSubmit = e => {
-        e.preventDefault();
-        submitAnswer(selectedOption)
+  const handleSubmit = () => {
+        socket.socket.emit("ready", socket.socket.id)
     }
+
+  useEffect(() => {
+    const socket = io(serverEndpoint);
+    socket.on("player-ready", (socket) => {
+      dispatch(playerReady(socket))
+    });
+  },[])
 
   return (
     <>
-      <p>{question}</p>
+      <p>Hello</p>
       {renderOptions}
       <button type='submit' onClick={handleSubmit}>Submit</button>
     </>  
-
   )
-
 }
 
 export default Options;

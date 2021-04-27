@@ -7,10 +7,12 @@ export const addMessage = ( user, message ) => ({ type: 'ADD_MESSAGE', payload: 
 
 export const addSocket = socket => ({type: 'ADD_SOCKET', payload: socket})  
 
-
 export const addPlayer = player => ({type: 'ADD_PLAYER', payload: player})  
 
 export const playerReady = player => ({type: 'PLAYER_READY', payload: player})  
+
+export const allNotReady = () => ({type: 'ALL_NOT_READY'})  
+
 
 
 export const getAnswers = gameId => {
