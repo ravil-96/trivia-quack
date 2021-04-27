@@ -1,10 +1,10 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
-import { Homepage, Lobby, Create, Result, Highscore } from './pages';
+import { GameRoom } from './layout';
+import { Homepage, Lobby, Create, Result, Questions, Highscore } from './pages';
 
 const App = () => {
     return (
-        <>
             <Switch>
                 <Route exact path="/">
                     <Homepage />
@@ -15,6 +15,12 @@ const App = () => {
                 <Route path="/lobby">
                     <Lobby />
                 </Route>
+                <Route path="/game/:id">
+                    <GameRoom />
+                </Route>
+                <Route path="/questions">
+                    <Questions />
+                </Route>
                 <Route path="/results/:id">
                     <Result />
                 </Route>
@@ -22,7 +28,6 @@ const App = () => {
                     <Highscore />
                 </Route>
             </Switch>
-        </>
     )
 }
 

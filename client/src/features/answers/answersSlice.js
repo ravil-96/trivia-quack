@@ -1,20 +1,27 @@
 const initialState = [
-    { playerId: 1, response: 'option2' },
-    { playerId: 2, response: 'option1' },
-    { playerId: 3, response: 'option3' },
-    { playerId: 4, response: 'option4' },
-    { playerId: 5, response: 'option1' }
+    { playerId: 1, responses: [], error: false },
+    // { playerId: 2, response: null },
+    // { playerId: 3, response: null },
+    // { playerId: 4, response: null },
+    // { playerId: 5, response: null }
 ]
 
-export default function answersReducer(state = initialState, action){
+export const answersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'answers/answerSelected':
-            return [
-                ...state, 
-                {
-                    response: action.payload
-                }
+        // case 'answers/answerSubmitted':
+        //     return [
+        //         ...state,
+        //         {
+        //             response: action.payload
+        //         }
+        //     ]
+        case 'player1/answerSubmit':
+            return [ 
+                ...state,
+                {...state, responses: action.payload, error: false }
             ]
+        case 'SET_ERROR':
+            return {...state, error: action.payload}
         default:
             return state
     }

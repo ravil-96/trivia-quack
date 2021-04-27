@@ -1,9 +1,10 @@
 const initialState = [
-    {playerId: 1, name: "Ravil", totalScore: 0},
-    {playerId: 2, name: "Adil", totalScore: 0},
-    {playerId: 3, name: "Elwin", totalScore: 0},
-    {playerId: 4, name: "Aaron", totalScore: 0},
-    {playerId: 5, name: "Chris", totalScore: 0},
+    {playerId: 1, name: 'Ravil', totalScore: 0},
+    {playerId: 2, name: 'Adil', totalScore: 0},
+    {playerId: 3, name: 'Elwin', totalScore: 0},
+    {playerId: 4, name: 'Aaron', totalScore: 0},
+    {playerId: 5, name: 'Chris', totalScore: 0},
+    {playerId:'', name: '', totalScore: 0},
 ]
 
 function nextPlayerId(players) {
