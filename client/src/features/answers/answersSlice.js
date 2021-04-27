@@ -1,12 +1,12 @@
 const initialState = [
-    { playerId: 1, response: 'option2' },
-    { playerId: 2, response: 'option1' },
-    { playerId: 3, response: 'option3' },
-    { playerId: 4, response: 'option4' },
-    { playerId: 5, response: 'option1' }
+    { playerId: 1, response: null, ready: false },
+    // { playerId: 2, response: null },
+    // { playerId: 3, response: null },
+    // { playerId: 4, response: null },
+    // { playerId: 5, response: null }
 ]
 
-export default function answersReducer(state = initialState, action){
+export const answersReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'answers/answerSubmitted':
             return [
