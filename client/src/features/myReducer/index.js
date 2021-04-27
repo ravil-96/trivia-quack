@@ -1,5 +1,10 @@
 function myReducer (state = {players: []}, action) {
     switch (action.type) {
+      case 'ADD_SOCKET':
+        return ({
+          ...state,
+          socket: action.payload
+        })
       case 'ADD_PLAYER':
         return ({
             ...state,

@@ -3,7 +3,7 @@ import { PlayerCard } from '../../components';
 import io from 'socket.io-client';
 import axios from 'axios'
 
-import { addPlayer, playerReady } from '../../actions'
+import { addPlayer, playerReady, addSocket } from '../../actions'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
@@ -20,19 +20,23 @@ import icon9 from '../../images/player-9.png';
 import icon10 from '../../images/player-10.png';
 
 const Lobby = () => {
-  const [socket, setSocket] = useState(null);
+  // const [socket, setSocket] = useState(null);
 
   const { id } = useParams()
   const history = useHistory()
   console.log(id)
   const dispatch = useDispatch()
   const serverEndpoint = "http://localhost:3000"
+
   const currentPlayers = useSelector(state => state.myReducer.players)
+  const socket = useSelector(state => state.myReducer.socket)
+
 
 
   useEffect(() => {
     const socket = io(serverEndpoint);
-    setSocket({ socket });
+    dispatch(addSocket({ socket }))
+    // setSocket({ socket });
     socket.emit("create", id);
 
     socket.on("players-in-room", (list) => {
