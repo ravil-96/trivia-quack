@@ -7,6 +7,9 @@ export const addMessage = ( user, message ) => ({ type: 'ADD_MESSAGE', payload: 
 
 export const addPlayer = player => ({type: 'ADD_PLAYER', payload: player})  
 
+export const playerReady = player => ({type: 'PLAYER_READY', payload: player})  
+
+
 export const getAnswers = gameId => {
     return async (dispatch) => {
         try {
