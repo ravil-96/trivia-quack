@@ -8,11 +8,11 @@ function Options ({id}) {
 // 2. The user submits an answer
   dispatch(getQuestion(id))
   
-  const question = useSelector(state => state.questions[0].questionTitle)
-  const option1 = useSelector(state => state.questions[0].option1)
-  const option2 = useSelector(state => state.questions[0].option2)
-  const option3 = useSelector(state => state.questions[0].option3)
-  const option4 = useSelector(state => state.questions[0].option4)
+  const question = useSelector(state => state.questions.questionTitle)
+  const option1 = useSelector(state => state.questions.options[0])
+  const option2 = useSelector(state => state.questions.options[1])
+  const option3 = useSelector(state => state.questions.options[2])
+  const option4 = useSelector(state => state.questions.options[3])
 
 
   const [selectedOption, setSelectedOption] = useState();
