@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-import useParams from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {getQuestion} from '../../actions/questionActions';
 
-function Options () {
-  const {id} = useParams();
+function Options ({id}) {
   const dispatch = useDispatch();
 // 1. The user clicks on a button and it is highlighted
 // 2. The user submits an answer
@@ -32,6 +30,7 @@ function Options () {
 
   return (
     <>
+      <p>{question}</p>
       <button onClick={handleSelect} value={option1}>{option1}</button>
       <button onClick={handleSelect} value={option2}>{option2}</button>
       <button onClick={handleSelect} value={option3}>{option3}</button>

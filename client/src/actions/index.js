@@ -3,9 +3,7 @@ import { useParams } from 'react-router-dom'
 // write redux actions here
 // e.g.
 // export const addUser = newUser => ({ type: 'ADD_USER', payload: newUser })
-<<<<<<< HEAD
 export const addMessage = ( user, message ) => ({ type: 'ADD_MESSAGE', payload: {user, message} })
-=======
 
 export const loadOption = option => {
     return {
@@ -39,4 +37,3 @@ const fetchOptions = async () => {
      }
 }
 
->>>>>>> fe9e4c3baabe2aca7be57fc285d1df9d22a5e026

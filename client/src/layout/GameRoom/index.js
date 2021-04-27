@@ -13,7 +13,7 @@ import { } from '../../features;
 
 *************************************** */
 
-import { Chat } from '../../components'
+import { Chat, Options } from '../../components'
 import { addMessage } from '../../actions'
 
 const serverEndpoint = "http://localhost:3000"
@@ -83,12 +83,13 @@ const GameRoom = () => {
         <section id="game-room">
              <div id="App">Room: {id}</div>
              <span>users: {count}</span>
-            { loading ? 
+            {/* { loading ? 
                 (<div>loading...</div>) : 
                 error ? (<div>{JSON.stringify(error)}</div>
       ) : (
       <Chat messages={messages} sendMessage={sendMessage} />
-      )}
+      )} */}
+          <Options id={id}/>
         </section>
     )
 
