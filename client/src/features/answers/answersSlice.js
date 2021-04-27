@@ -8,9 +8,9 @@ const initialState = [
 
 export default function answersReducer(state = initialState, action){
     switch (action.type) {
-        case 'answers/answerSelected':
+        case 'answers/answerSubmitted':
             return [
-                ...state, 
+                ...state,
                 {
                     response: action.payload
                 }
