@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
-import { Homepage, Lobby, Create, Result } from './pages';
+import { Homepage, Lobby, Create, Result, Highscore } from './pages';
 
 const App = () => {
     return (
@@ -17,6 +17,9 @@ const App = () => {
                 </Route>
                 <Route path="/results/:id">
                     <Result />
+                </Route>
+                <Route path="/highscore">
+                    <Highscore />
                 </Route>
             </Switch>
         </>
