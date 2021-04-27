@@ -1,4 +1,6 @@
 import React from 'react';
+import { PlayerCard } from '../../components';
+
 import icon1 from '../../images/player-1.png';
 import icon2 from '../../images/player-2.png';
 import icon3 from '../../images/player-3.png';
@@ -20,21 +22,14 @@ const Lobby = () => {
     return icon;
   }
 
-  const returnPlayer = () => {
-    fakePlayers.forEach(player => {
+  const returnPlayer = fakePlayers.map(player => {
       console.log("TEST")
-      return (
-        <div className="player-holder">
-          <h1>{player}</h1>
-          <img src={returnIcon} alt="Player Icon"/>
-        </div>
-      )
+      return <PlayerCard player={player} icon={returnIcon()} />
     })
-  }
 
   return (
     <main id="lobby" className="container">
-      {fakePlayers ? returnPlayer : <h1>No players found.</h1>}
+      { returnPlayer }
     </main>
   );
 };
