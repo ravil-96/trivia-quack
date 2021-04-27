@@ -1,9 +1,14 @@
-function myReducer (state = [], action) {
+function myReducer (state = {players: []}, action) {
     switch (action.type) {
+      case 'ADD_PLAYER':
+        return ({
+            ...state,
+            players: action.payload
+        })
       case 'LOAD_QUESTIONS':
-        return ([
-            ...action.payload             
-        ])
+        return ({
+          ...state,
+          questions:[...action.payload]})        
       case 'SET_ERROR' :
         return 'error'
       case 'ADD_MESSAGE':

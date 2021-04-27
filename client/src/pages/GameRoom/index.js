@@ -28,7 +28,7 @@ const GameRoom = () => {
     const [loading, setLoading] = useState()
     const [room, setRoom] = useState()
   
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState()
   
     const questions = useSelector(state => state.myReducer)
     const dispatch = useDispatch()

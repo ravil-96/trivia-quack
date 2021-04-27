@@ -11,7 +11,7 @@ const App = () => {
                 <Route path="/create">
                     <Create />
                 </Route>
-                <Route path="/lobby">
+                <Route path="/lobby/:id">
                     <Lobby />
                 </Route>
                 <Route path="/game/:id">
