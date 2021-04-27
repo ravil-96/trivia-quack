@@ -4,11 +4,6 @@ import { useParams } from 'react-router-dom'
 // e.g.
 // export const addUser = newUser => ({ type: 'ADD_USER', payload: newUser })
 
-
-
-
-
-
 export const loadOption = option => {
     return {
         type: 'answers/answerSubmitted',
@@ -35,7 +30,7 @@ const fetchOptions = async () => {
      try {
         if (data.status === 404) { throw Error } 
         console.log(data)
-        return data.questions[].possible_answers
+        return data.questions.possible_answers
      } catch(err) {
          throw new Error(err.message)
      }
