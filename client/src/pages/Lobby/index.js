@@ -76,7 +76,7 @@ const Lobby = () => {
       return (
       <>
       <div>{JSON.stringify(player.ready)}</div>
-      <PlayerCard player={player.player} icon={returnIcon()} ready={player.ready} />
+      <PlayerCard player={player.player} me={player.player === socket.socket.id} icon={returnIcon()} ready={player.ready} />
       </>
       )
   });
