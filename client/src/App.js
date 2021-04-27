@@ -15,7 +15,7 @@ const App = () => {
                 <Route path="/lobby">
                     <Lobby />
                 </Route>
-                <Route path="/result/:id">
+                <Route path="/results/:id">
                     <Result />
                 </Route>
             </Switch>
