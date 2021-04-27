@@ -18,11 +18,6 @@ import icon8 from '../../images/player-8.png';
 import icon9 from '../../images/player-9.png';
 import icon10 from '../../images/player-10.png';
 
-function PlayersList({players, icon}){
-    console.log(players)
-    return players.map(player => <PlayerCard player={player.player} icon={icon()} ready={player.ready} />)
-}
-
 const Lobby = () => {
   const [socket, setSocket] = useState(null);
 
@@ -65,6 +60,15 @@ const Lobby = () => {
 
   const readyMarker = false;
 
+  const returnPlayer = currentPlayers.map(player => {
+      return (
+      <>
+      <div>{JSON.stringify(player.ready)}</div>
+      <PlayerCard player={player.player} icon={returnIcon()} ready={player.ready} />
+      </>
+      )
+  });
+
   return (
     <main id="lobby" className="container">
       <div class="row">
@@ -73,7 +77,7 @@ const Lobby = () => {
         </div>
         <div class="col-md-6">
           <h3>Player List:</h3>
-          <PlayersList players={currentPlayers} icon={returnIcon} />
+          { returnPlayer }
         </div>
       </div>
     </main>
