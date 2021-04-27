@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
 import { GameRoom } from './layout';
-import { Homepage, Lobby, Create, Result, Questions } from './pages';
+import { Homepage, Lobby, Create, Result, Questions, Highscore } from './pages';
 
 const App = () => {
     return (
@@ -23,6 +23,9 @@ const App = () => {
                 </Route>
                 <Route path="/results/:id">
                     <Result />
+                </Route>
+                <Route path="/highscore">
+                    <Highscore />
                 </Route>
             </Switch>
     )
