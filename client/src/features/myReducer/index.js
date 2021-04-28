@@ -29,7 +29,9 @@ function myReducer (state = {players: [], answers: []}, action) {
       case 'LOAD_QUESTIONS':
         return ({
           ...state,
-          questions:[...action.payload]}) 
+          questions:[...action.payload],
+          difficulty:[...action.payload]
+        }) 
       case 'ADD_ANSWER':
         return ({
           ...state,
