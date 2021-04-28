@@ -11,12 +11,10 @@ describe('Create', () => {
   })
 
   test("dropdown contains 'General Knowledge' option", () => {
-    
-    expect(screen.getByRole('menuitem', {name: 'General Knowledge'})).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', {name: 'category'})).toBeInTheDocument();
   })
 
   test("it displays the 'next' button", () => {
-    
     expect(screen.getByRole('link', {name: 'Next'})).toBeInTheDocument();
   })
 
