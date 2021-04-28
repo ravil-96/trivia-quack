@@ -10,7 +10,7 @@ const Lobby = () => {
 
   const createRoom = async () => {
       try {
-          let { data } = await axios.post("http://localhost:3000/games");
+          let { data } = await axios.post("http://localhost:3000/games?amount=4");
           console.log(data);
           history.push(`/lobby/${data}`)     
       } catch (err) {
