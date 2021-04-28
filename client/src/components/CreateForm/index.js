@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 const CreateForm = ({ createRoom }) => {
 
-  const [ amount , setAmount ] = useState("");
-  const [ category , setCategory ] = useState("");
-  const [ difficulty , setDifficulty ] = useState("");
-  const [ type, setType ] = useState("");
+  const [ amount , setAmount ] = useState("3");
+  const [ category , setCategory ] = useState("9");
+  const [ difficulty , setDifficulty ] = useState("easy");
+  const [ type, setType ] = useState("boolean");
   
   const selectAmount = (e) => {
     setAmount(e.target.value);
