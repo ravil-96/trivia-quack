@@ -33,6 +33,7 @@ const GameRoom = () => {
   const answers = useSelector(state => state.myReducer.answers)
 
   const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [theme, setTheme] = useState("theme-planet-1");
 
     useEffect(() => {
         dispatch(getAnswers(id))
@@ -54,6 +55,17 @@ const GameRoom = () => {
       }
     },[currentPlayers])
 
+    useEffect(() => {
+      let question = currentQuestion;
+      if (question % 3 === 2) {
+        setTheme("theme-planet-3");
+      } else if (question % 3 === 1) {
+        setTheme("theme-planet-2");
+      } else {
+        setTheme("theme-planet-1");
+      }
+    },[currentQuestion])
+
     const icons = [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10];
 
     const returnIcon = () => {
@@ -69,19 +81,24 @@ const GameRoom = () => {
   
 
     return (
-      <section style={{ color: "white" }} id="game-room" className="container">
-        <div id="App">Room: {id}</div>
-        { questions ?
-          <>
-            <div className="text-center">
-              <h3>QUESTION {currentQuestion+1}</h3>
-              <h1>{questions[currentQuestion].question}</h1>
-            </div>
-            <Options options={questions[currentQuestion].possible_answers}/>
-            {returnPlayer}
-          </>
-        :
-          null }
+      <section style={{ color: "white" }} id="game-room" className={theme}>
+        <div class="container">
+          <div id="App">Room: {id}</div>
+          <div className="planets">
+            
+          </div>
+          { questions ?
+            <>
+              <div className="text-center">
+                <h3>QUESTION {currentQuestion+1}</h3>
+                <h1>{questions[currentQuestion].question}</h1>
+              </div>
+              <Options options={questions[currentQuestion].possible_answers}/>
+              {returnPlayer}
+            </>
+          :
+            null }
+        </div>
       </section>
     );
 
