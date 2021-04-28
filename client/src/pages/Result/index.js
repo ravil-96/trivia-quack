@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
 const Result = () => {
+     const socket = useSelector(state => state.myReducer.socket)
     const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
     const { id } = useParams()
     const [results, setResults] = useState([])
@@ -26,7 +28,7 @@ const Result = () => {
         getResults();
       }, []);
 
-      const scoreList = scores.map((score, i) => <li key={i}>{score.name} : {score.count}</li>)
+      const scoreList = scores.map((score, i) => <li key={i}>{score.name}{socket.socket.id === score.name ? '(you)' : null} : {score.count}</li>)
 
       const answersList = results.map((result, i) => {
         return (
@@ -41,7 +43,7 @@ const Result = () => {
                   }}
                 >
                   {renderHTML(answer)}
-                  <ul>{result.player_answers.filter(c => c.answer === answer).map(d => <li>{d.player}</li>)}</ul>
+                  <ul>{result.player_answers.filter(c => c.answer === answer).map(d => <li>{d.player}{socket.socket.id === d.player ? '(you)' : null}</li>)}</ul>
                 </li>
               ))}
             </ul>
