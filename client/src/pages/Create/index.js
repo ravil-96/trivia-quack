@@ -1,11 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { CreateForm } from '../../components';
 
 const Lobby = () => {
   const history = useHistory();
+
+  const amount = useSelector(state => state.paramsReducer.amount);
+  const category = useSelector(state => state.paramsReducer.category);
+  const difficulty = useSelector(state => state.paramsReducer.difficulty);
 
   const createRoom = async () => {
       try {
