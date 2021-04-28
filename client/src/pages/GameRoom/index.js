@@ -69,13 +69,19 @@ const GameRoom = () => {
   
 
     return (
-      <section style={{ color: "white" }} id="game-room">
+      <section style={{ color: "white" }} id="game-room" className="container">
         <div id="App">Room: {id}</div>
-        { questions ? <>
-          <p>{questions[0].category} - {currentQuestion+1}/{questions.length}</p>
-         <p>{questions[currentQuestion].question}</p>
-        <Options options={questions[currentQuestion].possible_answers}/>
-        {returnPlayer}</> : null }
+        { questions ?
+          <>
+            <div className="text-center">
+              <h3>QUESTION {currentQuestion+1}</h3>
+              <h1>{questions[currentQuestion].question}</h1>
+            </div>
+            <Options options={questions[currentQuestion].possible_answers}/>
+            {returnPlayer}
+          </>
+        :
+          null }
       </section>
     );
 
