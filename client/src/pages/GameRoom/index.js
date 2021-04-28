@@ -49,8 +49,8 @@ const GameRoom = () => {
             method: 'post',
             url: `http://localhost:3000/games/${id}/players/${socket.socket.id}/answers`,
             data: answers
-          }), Math.random * 3000);
-          setTimeout(() => history.push(`/results/${id}`),3000)
+          }), Math.random * 5000);
+          setTimeout(() => history.push(`/results/${id}`),5000)
         }
       }
     },[currentPlayers])
