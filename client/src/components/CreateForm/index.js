@@ -23,7 +23,7 @@ const CreateForm = ({ createRoom }) => {
   }
 
   return (
-    <form className="text-center" onSubmit={handleSubmit}>
+    <form className="create-form text-center" onSubmit={handleSubmit}>
       <div id="option-1" className={ showOption1 ? "" : "d-none"}>
           <label for="category">Select a Category for your quiz:</label>
           <select name="category" id="category">
