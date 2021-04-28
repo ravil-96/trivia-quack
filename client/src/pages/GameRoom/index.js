@@ -49,7 +49,7 @@ const GameRoom = () => {
             url: `http://localhost:3000/games/${id}/players/${socket.socket.id}/answers`,
             data: answers
           });
-          history.push(`/results/${id}`)
+          setTimeout(() => history.push(`/results/${id}`),3000)
         }
       }
     },[currentPlayers])
