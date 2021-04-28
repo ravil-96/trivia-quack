@@ -14,7 +14,7 @@ services:
     working_dir: /code
     volumes:
       - type: bind
-        source: ./api
+        source: ./socket
         target: /code    
 
   db:
