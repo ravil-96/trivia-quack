@@ -1,5 +1,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+
+import {Options} from '../../components'
 // Import actions & components 
 
 
@@ -25,6 +27,8 @@ function questionPage () {
     </>
   )
 }
+
+export default Options;
 
 
 

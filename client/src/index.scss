@@ -7,9 +7,15 @@
 @import './pages/Homepage/homepage';
 @import './pages/Lobby/lobby';
 @import './pages/Create/create';
+@import './pages/Highscore/highscore';
+@import './pages/GameRoom/gameroom';
+@import './pages/Result/result';
 
 // Components
 @import './components/CreateForm/createform';
+@import './components/PlayerCard/playercard';
+@import './components/ScoreView/scoreview';
+@import './components/Options/options';
 
 body {
   background-color: $background-color;

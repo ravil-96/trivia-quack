@@ -1,10 +1,9 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
-import { Homepage, Lobby, Create, Result } from './pages';
+import { Homepage, Lobby, Create, Result, Questions, Highscore, GameRoom } from './pages';
 
 const App = () => {
     return (
-        <>
             <Switch>
                 <Route exact path="/">
                     <Homepage />
@@ -12,14 +11,22 @@ const App = () => {
                 <Route path="/create">
                     <Create />
                 </Route>
-                <Route path="/lobby">
+                <Route path="/lobby/:id">
                     <Lobby />
                 </Route>
-                <Route path="/result/:id">
+                <Route path="/game/:id">
+                    <GameRoom />
+                </Route>
+                <Route path="/questions">
+                    <Questions />
+                </Route>
+                <Route path="/results/:id">
                     <Result />
                 </Route>
+                <Route path="/highscore">
+                    <Highscore />
+                </Route>
             </Switch>
-        </>
     )
 }
 
