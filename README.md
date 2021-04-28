@@ -2,6 +2,8 @@
 
 ## todo / bugs
 
+- when creating a game, user should be able to send parameters from form
+
 - store player icon in redux / db for results
 	- icons currently re-reassign whenever playerlist compoennet rerenders (which is often)
 	- just move the icon state to the redux store, similar to ready state
