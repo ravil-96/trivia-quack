@@ -3,7 +3,7 @@ import { playerReady, addAnswer } from '../../actions'
 import { useSelector, useDispatch } from 'react-redux'
 import io from 'socket.io-client';
 
-const serverEndpoint = "http://localhost:3000"
+const serverEndpoint = "http://localhost:5001"
 
   
 function Options ({options}) {
