@@ -93,13 +93,13 @@ const Lobby = () => {
         </section>
       )}
 
-      <div class="row">
-        <div class="col-md-6 text-center align-self-center">
+      <div className="row">
+        <div className="col-md-6 text-center align-self-center">
           <button onClick={handleReady} className="ready-button">
             Ready Up
           </button>
         </div>
-        <div class="col-md-6">
+        <div className="col-md-6">
           <h3>Player List:</h3>
           {returnPlayer}
         </div>
