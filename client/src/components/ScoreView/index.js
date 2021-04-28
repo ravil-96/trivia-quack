@@ -5,7 +5,7 @@ const ScoreView = ({players}) => {
   const generateTable = players.map((player, index) => {
     if (index >= 3) {
       return (
-        <div class="table-place">
+        <div className="table-place">
           <img src={player.icon} alt="Player Icon" />
           <span>{index + 1}</span>
           <h5>Guest-{player.player}</h5>
@@ -17,9 +17,9 @@ const ScoreView = ({players}) => {
 
   return (
     <div className="scoreview text-center">
-      <div class="row">
+      <div className="row">
         { players[1] ?
-          <div class="second-place col-sm-4">
+          <div className="second-place col-sm-4">
             <img src={players[1].icon} alt="Player Icon" />
             <span>2</span>
             <h5>Guest-{players[1].player}</h5>
@@ -29,7 +29,7 @@ const ScoreView = ({players}) => {
           <></>
         }
         { players[0] ?
-          <div class="first-place col-sm-4">
+          <div className="first-place col-sm-4">
             <img src={players[0].icon} alt="Player Icon" />
             <span>1</span>
             <h5>Guest-{players[0].player}</h5>
@@ -39,7 +39,7 @@ const ScoreView = ({players}) => {
           <></>
         }
         { players[2] ?
-          <div class="third-place col-sm-4">
+          <div className="third-place col-sm-4">
             <img src={players[2].icon} alt="Player Icon" />
             <span>3</span>
             <h5>Guest-{players[2].player}</h5>

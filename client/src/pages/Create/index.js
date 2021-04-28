@@ -3,14 +3,13 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 import { CreateForm } from '../../components';
-import { GameRoom } from '../../layout';
 
 const Lobby = () => {
   const history = useHistory();
 
-  const createRoom = async () => {
+  const createRoom = async (amount, category, difficulty, type) => {
       try {
-          let { data } = await axios.post("http://localhost:3000/games?amount=4");
+          let { data } = await axios.post(`http://localhost:3000/games?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`);
           console.log(data);
           history.push(`/lobby/${data}`)     
       } catch (err) {
@@ -20,7 +19,7 @@ const Lobby = () => {
 
   return (
     <main id="create" className="container">
-      <CreateForm createRoom={createRoom}/>
+      <CreateForm createRoom={createRoom} />
     </main>
   );
 };
