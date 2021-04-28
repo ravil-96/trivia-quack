@@ -1,6 +1,6 @@
 # Quizz App
 
-# API 
+## API 
 - POST /games
   - creates a new game with a unique id and a list of questions, returns the id to redirect the user
   - optional query params like this /games?amount=5&difficulty=easy&category=10&type=multiple
@@ -24,6 +24,18 @@
     }, ... 
    ]
   }
+```
+ - GET /games/:id/simple 
+   - returns an object with info about that game but no questions
+
+```
+{
+  "completed": false,
+  "started": true,
+  "type": "multiple",
+  "category": "Politics",
+  "length": 5
+}
 ```
 
 - POST /games/:id/player/:playername e.g /games/6086c0c4d44a15002cf791b4/player/bob
