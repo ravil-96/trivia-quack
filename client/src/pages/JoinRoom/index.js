@@ -1,15 +1,25 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
-const JoinRoom = () => {
+function JoinRoom () {
+    const [url, setUrl] = useState('')
+
+    const handleChange = (e) => {
+        setUrl(e.target.value)
+    }
+
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+        location.href = url;
+    }
 
     return (
     <>
-       <form>
+        <form aria-label="redirect" onSubmit={handleSubmit}>
            <h3>Type URL here to Join Game</h3>
-           <p><label for="url">Shared Link</label><input id='url' type='text' name="url" placeholder='Type url here'/>
-           </p></form>
-           <input type="button" onclick='handleRedirect' value="Join Game"></input>
+           <label for="url">Shared Link</label>
+           <input id='url' aria-label="joinLink" type='text' name="urlInput" placeholder="Type url here" value={url} onChange={handleChange} />
+           <input type="submit" value="Join Game"/>
+        </form>   
     </>)
 
 }
