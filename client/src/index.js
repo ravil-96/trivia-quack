@@ -7,14 +7,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.scss';
 
 ReactDOM.render(
-    <React.StrictMode>
         <Provider store={store}>
             <Router>
                 <Provider store={store}>
                     <App />
                 </Provider>                    
             </Router>
-        </Provider>
-    </React.StrictMode>,
+        </Provider>,
     document.getElementById('root')
 );

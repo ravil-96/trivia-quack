@@ -10,9 +10,9 @@ const Lobby = () => {
 
   const createRoom = async () => {
       try {
-          let { data } = await axios.post("http://localhost:3000/games"); // Change this once server is deployed
+          let { data } = await axios.post("http://localhost:3000/games?amount=4");
           console.log(data);
-          history.push(`/game/${data}`)     
+          history.push(`/lobby/${data}`)     
       } catch (err) {
           console.warn(err);
       }
