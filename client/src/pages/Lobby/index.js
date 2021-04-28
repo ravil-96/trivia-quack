@@ -21,6 +21,7 @@ import icon10 from '../../images/player-10.png';
 
 const Lobby = () => {
   // const [socket, setSocket] = useState(null);
+  const [gameInfo, setGameInfo] = useState(null)
 
   const { id } = useParams()
   const history = useHistory()
@@ -48,6 +49,11 @@ const Lobby = () => {
       dispatch(playerReady(socket))
     });
 
+    async function fetchInfo(){
+    const { data } = await axios.get(`http://localhost:3000/games/${id}/simple`)
+    setGameInfo(data)
+    }
+    fetchInfo()
   },[])
 
   useEffect(() => {
@@ -79,13 +85,23 @@ const Lobby = () => {
 
   return (
     <main id="lobby" className="container">
+      {gameInfo && (
+        <section style={{color: 'white'}}>
+          <p>Category: {gameInfo.category}</p>
+          <p>Type: {gameInfo.type}</p>
+          <p>Length: {gameInfo.length}</p>
+        </section>
+      )}
+
       <div class="row">
         <div class="col-md-6 text-center align-self-center">
-          <button onClick={handleReady} className="ready-button">Ready Up</button>
+          <button onClick={handleReady} className="ready-button">
+            Ready Up
+          </button>
         </div>
         <div class="col-md-6">
           <h3>Player List:</h3>
-          { returnPlayer }
+          {returnPlayer}
         </div>
       </div>
     </main>
