@@ -4,7 +4,8 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
 const Result = () => {
-     const socket = useSelector(state => state.myReducer.socket)
+    const socket = useSelector(state => state.myReducer.socket)
+    const qType = useSelector(state => state.myReducer.questions[0])
     const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
     const { id } = useParams()
     const [results, setResults] = useState([])
@@ -19,6 +20,8 @@ const Result = () => {
             setResults(data.data)
             setScores(data.scores)
             setLoading(false)
+            console.log('This is the data:',data)
+            console.log('questions from reducer: ',qType)
           } catch (err) {
             setLoading(false)
             setError(err)
@@ -50,7 +53,23 @@ const Result = () => {
           </div>
         );
       });
+      const pointsCalc = () => {
+         // noOfQs * difficult (factor) * game type * correct answers
+         // length(data.data) *  *  * data.scores.count
+        const noOfQs = (data.data).length
+        const diffFactor = 0
+        const gameType = qType.type
+        let typeFactor
+        const correctAns = data.scores.count
 
+        if (gameType === "boolean") {
+          return typeFactor = 1
+        } else if (gameType === "multiple") {
+          return typeFactor = 2
+        }
+
+        let playerPoints = noOfQs * correctAns * typeFactor 
+      }
   return (
     <>
       {loading ? (
