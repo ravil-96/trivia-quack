@@ -1,5 +1,6 @@
 # Quizz App
 
+
 ## todo / bugs
 
 - when creating a game, user should be able to send parameters from form
@@ -26,7 +27,6 @@
 
 - add global hiscore functionality
 	- when user scores are calculated we could add each score to a scores document in the db
-
 
 ## API 
 - POST /games
