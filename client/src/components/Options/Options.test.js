@@ -9,14 +9,21 @@ import userEvent from '@testing-library/user-event';
 //   })
 // })
 
+//<button handleSelect={stubHandleSelect}></button>
 describe('Options', () => {
-  let stubHandleSelect = jest.fn
-
+  
+  // beforeEach(() => {
+  //   render(<Options/>)
+  // });
+  
+  let stubHandleSelect = jest.fn();
 
   test('it calls a handleSelect prop when clicked', () => {
-    render(<button handleSelect={stubHandleSelect}></button>)
-    let btn = screen.getByRole('button, {}')
+    let btn = screen.getByRole('button');
+    userEvent.click(btn)
+    expect(stubHandleSelect).toHaveBeenCalledTimes(1)
   })
+
 })
 
 
