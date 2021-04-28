@@ -27,7 +27,7 @@ const Lobby = () => {
   const history = useHistory()
   console.log(id)
   const dispatch = useDispatch()
-  const serverEndpoint = "http://localhost:3000"
+  const serverEndpoint = "http://localhost:5001"
 
   const currentPlayers = useSelector(state => state.myReducer.players)
   const socket = useSelector(state => state.myReducer.socket)
