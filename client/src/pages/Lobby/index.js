@@ -88,6 +88,7 @@ const Lobby = () => {
       {gameInfo && (
         <section style={{color: 'white'}}>
           <p>Category: {gameInfo.category}</p>
+          {/* <p>Difficulty: {gameInfo.difficulty}</p> */}
           <p>Type: {gameInfo.type}</p>
           <p>Length: {gameInfo.length}</p>
         </section>
