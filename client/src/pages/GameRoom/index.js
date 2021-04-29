@@ -38,13 +38,12 @@ const GameRoom = () => {
           setCurrentQuestion(q => q + 1)
           setDisabled(false);
         } else {
-          const timeout =  (currentPlayers.findIndex(p => p.player == socket.socket.id) + 1) * 1000
-          setTimeout(() => axios({
+          axios({
             method: 'post',
             url: `${API_ADDRESS}/games/${id}/players/${socket.socket.id}/answers`,
             data: answers
-          }), timeout);
-          setTimeout(() => history.push(`/results/${id}`), (currentPlayers.length * 1000) + 1000)
+          });
+          setTimeout(() => history.push(`/results/${id}`), 3000)
         }
       }
     },[currentPlayers])
