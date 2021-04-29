@@ -2,15 +2,16 @@ import React, {useEffect, useState} from 'react';
 import { playerReady, addAnswer } from '../../actions'
 import { useSelector, useDispatch } from 'react-redux'
 import io from 'socket.io-client';
-import { API_Local_Socket, API_Production_Socket } from '../../actions/globalVars';
+import { SOCKET_ADDRESS } from '../../actions/globalVars';
 
-const serverEndpoint = `${API_Production_Socket}`
-
+const serverEndpoint = `${SOCKET_ADDRESS}`
   
-function Options ({options}) {
+function Options ({options, disabled, setDisabled}) {
   const dispatch = useDispatch()
   const socket = useSelector(state => state.myReducer.socket)
   const [selectedOption, setSelectedOption] = useState(null)
+  const renderHTML = (rawHTML) => React.createElement("span", { dangerouslySetInnerHTML: { __html: rawHTML } });
+
 
   const renderOptions = options.map((option, index) => {
     console.log(index);
@@ -35,7 +36,7 @@ function Options ({options}) {
     console.log(answerMarker);
     return (
       <button key={index} style={{background: selectedOption === option ? 'green' : null}} onClick={() => handleSelect(option)}>
-        <span>{answerMarker}</span> {option}
+        <span className="letter">{answerMarker}</span> {renderHTML(option)}
       </button>
     )
   })
@@ -46,6 +47,7 @@ function Options ({options}) {
     }
 
   const handleSubmit = () => {
+        setDisabled(true);
         socket.socket.emit("ready", socket.socket.id)
         dispatch(addAnswer(selectedOption))
     }
@@ -61,7 +63,7 @@ function Options ({options}) {
     <div className="options-section">
       {renderOptions}
       <div class="text-center">
-        <button className="text-center" type='submit' onClick={handleSubmit}>Submit</button>
+        <button className="text-center" type='submit' onClick={handleSubmit} disabled={disabled}>Submit</button>
       </div>
     </div>  
   )

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PlayerCard } from '../../components';
 import io from 'socket.io-client';
 import axios from 'axios'
-import { API_Local, API_Production, API_Local_Socket, API_Production_Socket } from '../../actions/globalVars';
+import { API_ADDRESS, SOCKET_ADDRESS } from '../../actions/globalVars';
 
 import { addPlayer, playerReady, addSocket, allNotReady } from '../../actions'
 
@@ -26,9 +26,8 @@ const Lobby = () => {
 
   const { id } = useParams()
   const history = useHistory()
-  console.log(id)
   const dispatch = useDispatch()
-  const serverEndpoint = `${API_Production_Socket}`
+  const serverEndpoint = `${SOCKET_ADDRESS}`
 
   const currentPlayers = useSelector(state => state.myReducer.players)
   const socket = useSelector(state => state.myReducer.socket)
@@ -51,7 +50,7 @@ const Lobby = () => {
     });
 
     async function fetchInfo(){
-    const { data } = await axios.get(`${API_Production}/games/${id}/simple`)
+    const { data } = await axios.get(`${API_ADDRESS}/games/${id}/simple`)
     setGameInfo(data)
     }
     fetchInfo()
@@ -59,7 +58,8 @@ const Lobby = () => {
 
   useEffect(() => {
     if (currentPlayers.length > 0 && currentPlayers.every(player => player.ready === true)) {
-      setTimeout(axios.post(`${API_Production}/games/${id}/players/${socket.socket.id}`, Math.random * 3000))
+      const timeout = (currentPlayers.findIndex(p => p.player == socket.socket.id) + 1) * 100
+      setTimeout(() => axios.post(`${API_ADDRESS}/games/${id}/players/${socket.socket.id}`, timeout))
       history.push(`/game/${id}`)
       dispatch(allNotReady())
     }
