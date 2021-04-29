@@ -24,9 +24,8 @@ const Result = () => {
             let { data } = await axios.get(`${API_ADDRESS}/games/${id}/results`);
             setResults(data.data)
             setScores(data.scores)
-            setDifficulty(data.difficulty)
             setLoading(false)
-            const scoreSortFix = data.scores.sort((a,b) => b.count - a.count).map(p => ({name: p.name, count: p.count}))
+            const scoreSortFix = data.scores.sort((a,b) => b.points - a.points).map(p => ({name: p.name, count: p.points}))
             setScores(scoreSortFix)
             setLoading(false)
           } catch (err) {
@@ -45,6 +44,7 @@ const Result = () => {
             <ul>
               {result.all_answers.map((answer, j) => (
                 <li
+                  key={j}
                   className={
                       answer === result.correct_answer ? "answer-correct" : "answer-wrong"
                   }
@@ -68,6 +68,7 @@ const Result = () => {
         setAnswersResults(true);
       }
 
+      console.log(scores)
   return (
     <div id="results" className="container">
       {loading ? (
