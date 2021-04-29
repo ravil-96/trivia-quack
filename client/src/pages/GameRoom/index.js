@@ -25,6 +25,8 @@ const GameRoom = () => {
   const [purpleTheme, setPurpleTheme] = useState('position3');
   const [pinkTheme, setPinkTheme] = useState('position2');
 
+  const [planetSelectTheme, setPlanetSelectTheme] = useState('planet-select-blue');
+
   const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
 
   const currentPlayers = useSelector(state => state.myReducer.players)
@@ -59,19 +61,28 @@ const GameRoom = () => {
 
     const setTheme = useTheme(currentQuestion);
 
-    // useEffect(() => {
-    //   let question = currentQuestion;
-    //   if (question % 3 === 2) {
-    //     console.log('Test 3')
-    //     set("theme-planet-3");
-    //   } else if (question % 3 === 1) {
-    //     console.log('Test 2')
-    //     setTheme("theme-planet-2");
-    //   } else {
-    //     console.log('Test 1')
-    //     setTheme("theme-planet-1");
-    //   }
-    // },[currentQuestion])
+    useEffect(() => {
+      let question = currentQuestion;
+      if (question % 3 === 2) {
+        console.log('Test 3')
+        setBlueTheme("position3");
+        setPurpleTheme("position1");
+        setPinkTheme("position2");
+        setPlanetSelectTheme("planet-select planet-select-purple");
+      } else if (question % 3 === 1) {
+        console.log('Test 2')
+        setBlueTheme("position2");
+        setPurpleTheme("position3");
+        setPinkTheme("position1");
+        setPlanetSelectTheme("planet-select planet-select-pink");
+      } else {
+        console.log('Test 1')
+        setBlueTheme("position1");
+        setPurpleTheme("position2");
+        setPinkTheme("position3");
+        setPlanetSelectTheme("planet-select planet-select-blue");
+      }
+    },[currentQuestion])
   
     const returnPlayer = currentPlayers.map((p, i) => {
         return <PlayerCard key={i} player={p.player.id} username={p.player.username} me={p.player.id === socket.socket.id} icon={getIcon(p.player.icon)} ready={p.ready} />
@@ -83,19 +94,20 @@ const GameRoom = () => {
         <div class="container">
           <div id="App">Room: {id}</div>
           <div className="planets">
+            <span className={planetSelectTheme}></span>
             <img className={blueTheme} src={planet1} alt="Planet 1" />
             <img className={pinkTheme} src={planet2} alt="Planet 2" />
             <img className={purpleTheme} src={planet3} alt="Planet 3" />
           </div>
           { questions ?
-            <>
+            <div>
               <div className="text-center">
                 <h3>QUESTION {currentQuestion+1}</h3>
                 <h1>{renderHTML(questions[currentQuestion].question)}</h1>
               </div>
               <Options options={questions[currentQuestion].possible_answers} disabled={disabled} setDisabled={setDisabled}/>
               {returnPlayer}
-            </>
+            </div>
           :
             null }
         </div>

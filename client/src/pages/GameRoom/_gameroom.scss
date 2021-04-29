@@ -7,6 +7,10 @@
   h3 {
     font-weight: 400;
   }
+
+  @media (max-width: 500px) {
+    overflow-y: scroll;
+  }
 }
 
 .theme-planet-1 {
@@ -45,6 +49,9 @@
 }
 
 .planets {
+  @media (max-width: 500px) {
+    display: none;
+  }
   height: 200px;
   img {
     position: absolute;
@@ -61,6 +68,7 @@
   }
   .position2 {
     width: 125px;
+    top: 50px;
     left: calc(50% - 62.5px);
     z-index: 3;
     animation-name: position2-3;
@@ -79,24 +87,45 @@
     animation-fill-mode: forwards;
   }
 
-  .animation1 {
-    animation-name: position1-2;
-    animation-duration: 2s;
-    animation-timing-function: ease-in;
+  .planet-select {
+    position: absolute;
+    width: 125vw;
+    height: 125vw;
+    left: -12.5vw;
+    top: -112.5vw;
+    border-radius: 50%;
+    border: solid 5px;
+  }
+
+  .planet-select-blue {
+    border-color: #068efc !important;
+    transition: border-color 2s;
+  }
+
+  .planet-select-pink {
+    border-color: #ff3c5a !important;
+    transition: border-color 2s;
+  }
+
+  .planet-select-purple {
+    border-color: #b115ff !important;
+    transition: border-color 2s;
   }
 }
 
 @keyframes position1-2 {
-  0%   {left: calc(75% - 37.5px); width: 75px}
-  100% {left: calc(50% - 62.5px); width: 125px}
+  0%   {left: calc(75% - 37.5px); width: 75px; 
+    top: 25px;}
+  100% {left: calc(50% - 62.5px); width: 125px; 
+    top: 50px;}
 }
 
 @keyframes position2-3 {
-  0%   {left: calc(50% - 62.5px); width: 125px}
-  100% {left: calc(25% - 37.5px); width: 75px}
+  0%   {left: calc(50% - 62.5px); width: 125px; top: 50px;}
+  100% {left: calc(25% - 37.5px); width: 75px; top: 25px;}
 }
 
 @keyframes position3-1 {
-  0%   {left: calc(25% - 37.5px); width: 75px}
-  100% {left: calc(75% - 37.5px); width: 75px}
+  0%   {left: calc(25% - 37.5px); width: 75px; top: 25px;}
+  100% {left: calc(75% - 37.5px); width: 75px; top: 25px;}
 }
