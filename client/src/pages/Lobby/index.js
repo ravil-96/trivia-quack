@@ -27,11 +27,9 @@ const Lobby = () => {
   useEffect(() => {
     const socket = io(serverEndpoint);
     dispatch(addSocket({ socket }))
-    // setSocket({ socket });
     socket.emit("create", id);
 
     socket.on("players-in-room", (list) => {
-      console.log(list)
       dispatch(addPlayer(list))
     });
 

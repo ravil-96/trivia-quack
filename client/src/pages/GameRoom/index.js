@@ -50,7 +50,6 @@ const GameRoom = () => {
     },[currentPlayers])
 
     const setTheme = useTheme(currentQuestion);
-    console.log(setTheme);
   
     const returnPlayer = currentPlayers.map((player, index) => {
         return <PlayerCard key={index} player={player.player} me={player.player === socket.socket.id} icon={getIcon()} ready={player.ready} />
