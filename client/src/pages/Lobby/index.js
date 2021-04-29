@@ -28,7 +28,7 @@ const Lobby = () => {
   const history = useHistory()
   console.log(id)
   const dispatch = useDispatch()
-  const serverEndpoint = `${API_Local_Socket}`
+  const serverEndpoint = `${API_Production_Socket}`
 
   const currentPlayers = useSelector(state => state.myReducer.players)
   const socket = useSelector(state => state.myReducer.socket)
@@ -51,7 +51,7 @@ const Lobby = () => {
     });
 
     async function fetchInfo(){
-    const { data } = await axios.get(`${API_Local}/games/${id}/simple`)
+    const { data } = await axios.get(`${API_Production}/games/${id}/simple`)
     setGameInfo(data)
     }
     fetchInfo()
@@ -59,7 +59,7 @@ const Lobby = () => {
 
   useEffect(() => {
     if (currentPlayers.length > 0 && currentPlayers.every(player => player.ready === true)) {
-      setTimeout(axios.post(`${API_Local}/games/${id}/players/${socket.socket.id}`, Math.random * 3000))
+      setTimeout(axios.post(`${API_Production}/games/${id}/players/${socket.socket.id}`, Math.random * 3000))
       history.push(`/game/${id}`)
       dispatch(allNotReady())
     }

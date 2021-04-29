@@ -19,7 +19,7 @@ export const addAnswer = answer => ({type: 'ADD_ANSWER', payload: answer})
 export const getAnswers = gameId => {
     return async (dispatch) => {
         try {
-            const res = await fetch(`${API_Local}/games/${gameId}`)
+            const res = await fetch(`${API_Production}/games/${gameId}`)
             const data = await res.json()
             let newQuestions = data.questions.map(question => question)
             console.log(newQuestions)

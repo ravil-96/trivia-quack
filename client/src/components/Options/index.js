@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import io from 'socket.io-client';
 import { API_Local_Socket, API_Production_Socket } from '../../actions/globalVars';
 
-const serverEndpoint = `${API_Local_Socket}`
+const serverEndpoint = `${API_Production_Socket}`
 
   
 function Options ({options}) {

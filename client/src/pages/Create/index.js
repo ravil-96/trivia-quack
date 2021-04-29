@@ -10,7 +10,7 @@ const Lobby = () => {
 
   const createRoom = async (amount, category, difficulty, type) => {
       try {
-          let { data } = await axios.post(`${API_Local}/games?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`);
+          let { data } = await axios.post(`${API_Production}/games?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`);
           console.log(data);
           history.push(`/lobby/${data}`)     
       } catch (err) {

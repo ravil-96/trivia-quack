@@ -48,7 +48,7 @@ const GameRoom = () => {
         } else {
           setTimeout(axios({
             method: 'post',
-            url: `${API_Local}/games/${id}/players/${socket.socket.id}/answers`,
+            url: `${API_Production}/games/${id}/players/${socket.socket.id}/answers`,
             data: answers
           }), Math.random * 3000);
           setTimeout(() => history.push(`/results/${id}`),3000)

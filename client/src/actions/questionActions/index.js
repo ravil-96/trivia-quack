@@ -6,7 +6,7 @@ const error = (err) => ({ type: 'SET_ERROR', payload: err.message });
 export const getQuestion = (id) => {
       return async dispatch => {
           try {
-              const {data} = await axios.get(`${API_Local}/games/${id}`)
+              const {data} = await axios.get(`${API_Production}/games/${id}`)
               let question1 = data.questions[0]
               let questionTitle = question1.question
               let opt1 = question1['possible_answers'][0]

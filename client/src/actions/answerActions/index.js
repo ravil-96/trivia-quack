@@ -6,7 +6,7 @@ const error = (err) => ({ type: 'SET_ERROR', payload: err.message });
 export const getPlayerAnswer = (id, playername, playerInput) => {
       return async dispatch => {
           try {
-              const {data} = await axios.post(`${API_Local}/games/${id}/player/${playername}/answers`)
+              const {data} = await axios.post(`${API_Production}/games/${id}/player/${playername}/answers`)
               // Define payload ??
               dispatch(answerInfo(/* Payload in here */))
           } catch (err){
