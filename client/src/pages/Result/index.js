@@ -8,7 +8,7 @@ import { API_Local, API_Production } from '../../actions/globalVars';
 const Result = () => {
 
     const socket = useSelector(state => state.myReducer.socket)
-    const qType = useSelector(state => state.myReducer.questions[0])
+    // const qType = useSelector(state => state.myReducer.questions[0])
     //  const socket = useSelector(state => state.myReducer.socket)
     const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
     const { id } = useParams()
@@ -135,10 +135,6 @@ const Result = () => {
           </div>
           <div className={showAnswers ? "answers" : "d-none"}>
             <div>{answersList}</div>
-
-            <div>
-              <p>{points}</p>
-            </div>
           </div>     
 
         </>
