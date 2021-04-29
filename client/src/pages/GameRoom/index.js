@@ -28,6 +28,8 @@ const GameRoom = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
+  const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
+
   const currentPlayers = useSelector(state => state.myReducer.players)
   const socket = useSelector(state => state.myReducer.socket)
   const questions = useSelector(state => state.myReducer.questions)
@@ -35,6 +37,7 @@ const GameRoom = () => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [theme, setTheme] = useState("theme-planet-1");
+  const [disabled, setDisabled] = useState(false);
 
     useEffect(() => {
         dispatch(getAnswers(id))
@@ -45,6 +48,7 @@ const GameRoom = () => {
         if (currentQuestion < questions.length-1) {
           dispatch(allNotReady())
           setCurrentQuestion(q => q + 1)
+          setDisabled(false);
         } else {
           const timeout =  (currentPlayers.findIndex(p => p.player == socket.socket.id) + 1) * 1000
           setTimeout(() => axios({
@@ -93,9 +97,9 @@ const GameRoom = () => {
             <>
               <div className="text-center">
                 <h3>QUESTION {currentQuestion+1}</h3>
-                <h1>{questions[currentQuestion].question}</h1>
+                <h1>{renderHTML(questions[currentQuestion].question)}</h1>
               </div>
-              <Options options={questions[currentQuestion].possible_answers}/>
+              <Options options={questions[currentQuestion].possible_answers} disabled={disabled} setDisabled={setDisabled}/>
               {returnPlayer}
             </>
           :
