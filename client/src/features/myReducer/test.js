@@ -33,4 +33,12 @@ describe('my reducer', () => {
         expect(addFakeAnswer).toMatchObject({answers: [fakeAnswer]})
     })
 
+    it('returns an error when SET_ERROR is called', () => {
+        const fakeError = myReducer(
+                                    undefined,
+                                    {type: 'SET_ERROR'}
+                            )
+        expect(fakeError).toEqual('error')
+    })
+
 });
