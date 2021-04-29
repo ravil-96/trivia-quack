@@ -9,6 +9,8 @@ import { API_ADDRESS } from '../../actions/globalVars';
 
 import { getIcon } from '../../actions/getIcon';
 
+import { useTheme } from '../../customHooks'
+
 
 const GameRoom = () => {
   const { id } = useParams()
@@ -23,7 +25,6 @@ const GameRoom = () => {
   const answers = useSelector(state => state.myReducer.answers)
 
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [theme, setTheme] = useState("theme-planet-1");
   const [disabled, setDisabled] = useState(false);
 
     useEffect(() => {
@@ -48,16 +49,8 @@ const GameRoom = () => {
       }
     },[currentPlayers])
 
-    useEffect(() => {
-      let question = currentQuestion;
-      if (question % 3 === 2) {
-        setTheme("theme-planet-3");
-      } else if (question % 3 === 1) {
-        setTheme("theme-planet-2");
-      } else {
-        setTheme("theme-planet-1");
-      }
-    },[currentQuestion])
+    const setTheme = useTheme(currentQuestion);
+    console.log(setTheme);
   
     const returnPlayer = currentPlayers.map((player, index) => {
         return <PlayerCard key={index} player={player.player} me={player.player === socket.socket.id} icon={getIcon()} ready={player.ready} />
@@ -65,7 +58,7 @@ const GameRoom = () => {
   
 
     return (
-      <section style={{ color: "white" }} id="game-room" className={theme}>
+      <section style={{ color: "white" }} id="game-room" className={setTheme}>
         <div class="container">
           <div id="App">Room: {id}</div>
           <div className="planets">
