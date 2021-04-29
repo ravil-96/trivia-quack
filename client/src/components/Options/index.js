@@ -41,7 +41,6 @@ function Options ({options, disabled, setDisabled}) {
     )
   })
 
-  
   const handleSelect = (option) => {
         setSelectedOption(option)
     }
