@@ -3,8 +3,6 @@ import { getIcon } from '../../actions/getIcon'
 
 const ScoreView = ({players}) => {
 
-  console.log(getIcon());
-
   const generateTable = players.map((player, index) => {
     if (index >= 3) {
       return (
@@ -21,22 +19,22 @@ const ScoreView = ({players}) => {
   return (
     <div className="scoreview text-center">
       <div className="row">
-        { players[1] ?
-          <div class="second-place col-sm-4">
-            <img src={getIcon()} alt="Player Icon" />
-            <span>2</span>
-            <h5>Guest-{players[1].name}</h5>
-            <p>{players[1].count}</p>
-          </div>
-          :
-          <></>
-        }
         { players[0] ?
           <div class="first-place col-sm-4">
             <img src={getIcon()} alt="Player Icon" />
             <span>1</span>
             <h5>Guest-{players[0].name}</h5>
             <p>{players[0].count}</p>
+          </div>
+          :
+          <></>
+        }
+        { players[1] ?
+          <div class="second-place col-sm-4">
+            <img src={getIcon()} alt="Player Icon" />
+            <span>2</span>
+            <h5>Guest-{players[1].name}</h5>
+            <p>{players[1].count}</p>
           </div>
           :
           <></>
