@@ -26,7 +26,6 @@ const Lobby = () => {
 
   const { id } = useParams()
   const history = useHistory()
-  console.log(id)
   const dispatch = useDispatch()
   const serverEndpoint = `${SOCKET_ADDRESS}`
 
@@ -59,7 +58,8 @@ const Lobby = () => {
 
   useEffect(() => {
     if (currentPlayers.length > 0 && currentPlayers.every(player => player.ready === true)) {
-      setTimeout(() => axios.post(`${API_ADDRESS}/games/${id}/players/${socket.socket.id}`, Math.random * 3000))
+      const timeout = (currentPlayers.findIndex(p => p.player == socket.socket.id) + 1) * 100
+      setTimeout(() => axios.post(`${API_ADDRESS}/games/${id}/players/${socket.socket.id}`, timeout))
       history.push(`/game/${id}`)
       dispatch(allNotReady())
     }

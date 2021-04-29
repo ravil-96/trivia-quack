@@ -46,12 +46,13 @@ const GameRoom = () => {
           dispatch(allNotReady())
           setCurrentQuestion(q => q + 1)
         } else {
+          const timeout =  (currentPlayers.findIndex(p => p.player == socket.socket.id) + 1) * 1000
           setTimeout(() => axios({
             method: 'post',
             url: `${API_ADDRESS}/games/${id}/players/${socket.socket.id}/answers`,
             data: answers
-          }), Math.random * 5000);
-          setTimeout(() => history.push(`/results/${id}`),5000)
+          }), timeout);
+          setTimeout(() => history.push(`/results/${id}`), (currentPlayers.length * 1000) + 1000)
         }
       }
     },[currentPlayers])
