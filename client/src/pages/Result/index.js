@@ -5,11 +5,15 @@ import { useParams } from 'react-router-dom'
 import { ScoreView } from '../../components'
 
 const Result = () => {
+
+    const socket = useSelector(state => state.myReducer.socket)
+    const qType = useSelector(state => state.myReducer.questions[0])
     //  const socket = useSelector(state => state.myReducer.socket)
     const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
     const { id } = useParams()
     const [results, setResults] = useState([])
     const [scores, setScores] = useState([])
+    const [points, setPoints] = useState([])
     const [loading, setLoading] = useState()
     const [error, setError] = useState(null)
     const [showResults, setShowResults] = useState(true);
@@ -25,6 +29,8 @@ const Result = () => {
             console.log(data.scores)
             console.log(data.data)
             setLoading(false)
+            console.log('This is the data:',data)
+            console.log('questions from reducer: ',qType)
           } catch (err) {
             setLoading(false)
             setError(err)
@@ -57,6 +63,44 @@ const Result = () => {
           </div>
         );
       });
+      
+      const pointsCalc = () => {
+         // noOfQs * difficult (factor) * game type * correct answers
+         // length(data.data) *  *  * data.scores.count
+        const noOfQs = results.length
+        const difficulty = qType.difficulty
+        let diffFactor
+        const gameType = qType.type
+        let typeFactor
+        const correctAns = scores.count
+
+        if (gameType === "boolean") {
+          return typeFactor = 1
+        } else if (gameType === "multiple") {
+          return typeFactor = 2
+        }
+        
+        if (difficulty === "easy") {
+          return diffFactor = 1
+        } else if (difficulty === "medium") {
+          return diffFactor = 2
+        } else if (difficulty === "hard") {
+          return diffFactor = 3
+        }
+        // console.log(noOfQs)
+        // console.log(difficulty)
+        // console.log(gameType)
+        // console.log(correctAns)
+        // console.log(diffFactor)
+        // console.log(typeFactor)
+       
+        let playerPoints = noOfQs * typeFactor * diffFactor * correctAns
+        
+        return playerPoints
+      }
+      pointsCalc()
+      setPoints(playerPoints)
+      
 
       const handleResult = () => {
         setAnswersResults(false);
@@ -91,7 +135,12 @@ const Result = () => {
           </div>
           <div className={showAnswers ? "answers" : "d-none"}>
             <div>{answersList}</div>
-          </div>
+
+            <div>
+              <p>{points}</p>
+            </div>
+          </div>     
+
         </>
       )}
     </div>
