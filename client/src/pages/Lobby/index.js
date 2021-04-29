@@ -57,11 +57,11 @@ const Lobby = () => {
   }
 
   function handleUsername(){
-    socket.socket.emit("ready", username)
+    socket.socket.emit("username", username)
   }
 
   const returnPlayer = currentPlayers.map((p, i) => {
-      return <PlayerCard key={i} player={p.player.id} me={p.player.id === socket.socket.id} icon={getIcon(p.player.icon)} ready={p.ready} />
+      return <PlayerCard key={i} player={p.player.id} username={p.player.username} me={p.player.id === socket.socket.id} icon={getIcon(p.player.icon)} ready={p.ready} />
   });
 
   const [username, setUsername] = useState("")
@@ -73,7 +73,7 @@ const Lobby = () => {
           <p>Type: {gameInfo.type}</p>
           <p>Length: {gameInfo.length}</p>
           <p>Game ID: {id}</p>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+          <input type="text" value={username} placeholder={"set username..."} onChange={(e) => setUsername(e.target.value)}/>
           <button onClick={handleUsername}>set</button>
         </section>
       )}
