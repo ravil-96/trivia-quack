@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { ScoreView } from '../../components'
-import { API_Local, API_Production } from '../../actions/globalVars';
+import { API_ADDRESS } from '../../actions/globalVars';
 
 const Result = () => {
 
     const socket = useSelector(state => state.myReducer.socket)
-    const qType = useSelector(state => state.myReducer.questions[0])
+    // const qType = useSelector(state => state.myReducer.questions[0])
     //  const socket = useSelector(state => state.myReducer.socket)
     const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
     const { id } = useParams()
@@ -24,17 +24,14 @@ const Result = () => {
         async function getResults() {
           try {
             setLoading(true)
-            let { data } = await axios.get(`${API_Production}/games/${id}/results`);
+            let { data } = await axios.get(`${API_ADDRESS}/games/${id}/results`);
             setResults(data.data)
             setScores(data.scores)
             setDifficulty(data.difficulty)
-            console.log(data.scores)
-            console.log(data.data)
             setLoading(false)
-            console.log('no of Qs:', results.length)
-            console.log('game type: ',qType.type)
-            console.log('The difficulty: ',qType.difficulty)
-            console.log('no of correct ans: ',scores.count)
+            const scoreSortFix = data.scores.sort((a,b) => b.count - a.count).map(p => ({name: p.name, count: p.count}))
+            setScores(scoreSortFix)
+            setLoading(false)
           } catch (err) {
             setLoading(false)
             setError(err)
@@ -44,23 +41,19 @@ const Result = () => {
         getResults();
       }, []);
 
-      const scoreSort = scores.sort((a,b) => b.score - a.score)
-      const scoreList = scores.map((score, i) => <li key={i}>{score.name}: {score.count}</li>)
-
       const answersList = results.map((result, i) => {
         return (
-          <div key={i}>
-            <div>{renderHTML(result.question)}</div>
+          <div key={i} className="answer-box">
+            <div className="answer-question">{renderHTML(result.question)}</div>
             <ul>
               {result.all_answers.map((answer, j) => (
                 <li
-                  style={{
-                    background:
-                      answer === result.correct_answer ? "green" : "red",
-                  }}
+                  className={
+                      answer === result.correct_answer ? "answer-correct" : "answer-wrong"
+                  }
                 >
                   {renderHTML(answer)}
-                  <ul>{result.player_answers.filter(c => c.answer === answer).map(d => <li>{d.player}</li>)}</ul>
+                  <ul className="answer-player-list">{result.player_answers.filter(c => c.answer === answer).map(d => <li>{d.player}</li>)}</ul>
                 </li>
               ))}
             </ul>
@@ -123,25 +116,20 @@ const Result = () => {
         <div>{JSON.stringify(error)}</div>
       ) : (
         <>
-          <div class="switch-buttons">
-            <a onClick={handleResult}>
+          <div className="switch-buttons">
+            <a className="switch-left" onClick={handleResult}>
               Results
             </a>
-            <a onClick={handleAnswers}>
+            <a className="switch-right" onClick={handleAnswers}>
               Answers
             </a>
           </div>
           <div className={showResults ? "scores" : "d-none"}>
             <h1>Results</h1>
-            <ul>{scoreList.sort((a,b) => b.score - a.score)}</ul>
-            <ScoreView players={scoreSort}/>
+            <ScoreView players={scores}/>
           </div>
           <div className={showAnswers ? "answers" : "d-none"}>
-            <div>{answersList}</div>
-
-            <div>
-              <p>{points}</p>
-            </div>
+            <div className="answer-holder">{answersList}</div>
           </div>     
 
         </>
