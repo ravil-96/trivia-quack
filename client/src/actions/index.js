@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { useParams } from 'react-router-dom'
-import { API_Local, API_Production } from './globalVars'
+import { API_ADDRESS } from './globalVars'
 // write redux actions here
 // e.g.
 // export const addUser = newUser => ({ type: 'ADD_USER', payload: newUser })
@@ -19,7 +18,7 @@ export const addAnswer = answer => ({type: 'ADD_ANSWER', payload: answer})
 export const getAnswers = gameId => {
     return async (dispatch) => {
         try {
-            const res = await fetch(`${API_Production}/games/${gameId}`)
+            const res = await fetch(`${API_ADDRESS}/games/${gameId}`)
             const data = await res.json()
             let newQuestions = data.questions.map(question => question)
             console.log(newQuestions)

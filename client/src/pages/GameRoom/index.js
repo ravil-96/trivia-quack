@@ -17,7 +17,7 @@ import axios from 'axios';
 
 import { PlayerCard, Options } from '../../components'
 import { getAnswers, allNotReady } from '../../actions'
-import { API_Local, API_Production } from '../../actions/globalVars';
+import { API_ADDRESS } from '../../actions/globalVars';
 
 
 import { playerReady } from '../../actions'
@@ -28,6 +28,8 @@ const GameRoom = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
+  const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
+
   const currentPlayers = useSelector(state => state.myReducer.players)
   const socket = useSelector(state => state.myReducer.socket)
   const questions = useSelector(state => state.myReducer.questions)
@@ -35,6 +37,7 @@ const GameRoom = () => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [theme, setTheme] = useState("theme-planet-1");
+  const [disabled, setDisabled] = useState(false);
 
     useEffect(() => {
         dispatch(getAnswers(id))
@@ -45,13 +48,15 @@ const GameRoom = () => {
         if (currentQuestion < questions.length-1) {
           dispatch(allNotReady())
           setCurrentQuestion(q => q + 1)
+          setDisabled(false);
         } else {
-          setTimeout(axios({
+          const timeout =  (currentPlayers.findIndex(p => p.player == socket.socket.id) + 1) * 1000
+          setTimeout(() => axios({
             method: 'post',
-            url: `${API_Production}/games/${id}/players/${socket.socket.id}/answers`,
+            url: `${API_ADDRESS}/games/${id}/players/${socket.socket.id}/answers`,
             data: answers
-          }), Math.random * 3000);
-          setTimeout(() => history.push(`/results/${id}`),3000)
+          }), timeout);
+          setTimeout(() => history.push(`/results/${id}`), (currentPlayers.length * 1000) + 1000)
         }
       }
     },[currentPlayers])
@@ -92,9 +97,9 @@ const GameRoom = () => {
             <>
               <div className="text-center">
                 <h3>QUESTION {currentQuestion+1}</h3>
-                <h1>{questions[currentQuestion].question}</h1>
+                <h1>{renderHTML(questions[currentQuestion].question)}</h1>
               </div>
-              <Options options={questions[currentQuestion].possible_answers}/>
+              <Options options={questions[currentQuestion].possible_answers} disabled={disabled} setDisabled={setDisabled}/>
               {returnPlayer}
             </>
           :

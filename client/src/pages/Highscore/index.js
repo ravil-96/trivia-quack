@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScoreView } from '../../components';
+import axios from 'axios'
+import { API_ADDRESS } from '../../actions/globalVars';
 
 import icon1 from '../../images/player-1.png';
 import icon2 from '../../images/player-2.png';
@@ -15,50 +17,18 @@ import icon10 from '../../images/player-10.png';
 const fakePlayers = ["123123", "213424", "234234", "234345"];
 const icons = [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10];
 
-const players = [
-  {
-    player: "123",
-    icon: icon1,
-    score: "95%",
-  },
-  {
-    player: "124",
-    icon: icon2,
-    score: "90%",
-  },
-  {
-    player: "125",
-    icon: icon3,
-    score: "85%",
-  },
-  {
-    player: "125",
-    icon: icon3,
-    score: "85%",
-  },
-  {
-    player: "125",
-    icon: icon3,
-    score: "85%",
-  },
-  {
-    player: "125",
-    icon: icon3,
-    score: "85%",
-  },
-  {
-    player: "125",
-    icon: icon3,
-    score: "85%",
-  },
-  {
-    player: "125",
-    icon: icon3,
-    score: "85%",
-  }
-]
 
 const Highscore = () => {
+  const [players, setPlayers] = useState([])
+useEffect(() => {
+  async function getScores(){
+  const { data } = await axios.get(`${API_ADDRESS}/games/scores`)
+  const topPlayers = data.scores.sort((a,b) => b.score - a.score).map(p => ({name: p.player, count: p.score}))
+  topPlayers.length = 10
+  setPlayers(topPlayers)
+  }
+  getScores()
+},[])
   return (
     <main id="highscore" className="container">
       <h1>Highscores</h1>
