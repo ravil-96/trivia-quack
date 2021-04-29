@@ -8,12 +8,12 @@ const Result = () => {
 
     const socket = useSelector(state => state.myReducer.socket)
     const qType = useSelector(state => state.myReducer.questions[0])
+    //  const socket = useSelector(state => state.myReducer.socket)
     const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
     const { id } = useParams()
     const [results, setResults] = useState([])
     const [scores, setScores] = useState([])
-    const [finalScore, setFinalScore] = useState()
-    // const [points, setPoints] = useState([])
+    const [points, setPoints] = useState([])
     const [loading, setLoading] = useState()
     const [error, setError] = useState(null)
     const [showResults, setShowResults] = useState(true);
@@ -29,10 +29,8 @@ const Result = () => {
             console.log(data.scores)
             console.log(data.data)
             setLoading(false)
-            
-            console.log('game type: ',qType.type)
-            console.log('The difficulty: ',qType.difficulty)
-          
+            console.log('This is the data:',data)
+            console.log('questions from reducer: ',qType)
           } catch (err) {
             setLoading(false)
             setError(err)
@@ -66,12 +64,6 @@ const Result = () => {
         );
       });
       
-      console.log('no of Qs:', results)
-      console.log('no of Qs:', results.length)
-      // console.log('no of correct ans: ', scores.count)
-      setFinalScore(scores[0])
-      console.log(finalScore.count)
-    
       const pointsCalc = () => {
          // noOfQs * difficult (factor) * game type * correct answers
          // length(data.data) *  *  * data.scores.count
@@ -106,8 +98,8 @@ const Result = () => {
         
         return playerPoints
       }
-      // pointsCalc()
-      // setPoints(playerPoints)
+      pointsCalc()
+      setPoints(playerPoints)
       
 
       const handleResult = () => {
@@ -119,8 +111,6 @@ const Result = () => {
         setShowResults(false);
         setAnswersResults(true);
       }
-
-      
 
   return (
     <div id="results" className="container">
@@ -147,7 +137,7 @@ const Result = () => {
             <div>{answersList}</div>
 
             <div>
-              {/* <p>{points}</p> */}
+              <p>{points}</p>
             </div>
           </div>     
 
