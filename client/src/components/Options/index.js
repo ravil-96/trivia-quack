@@ -7,11 +7,12 @@ import { API_Local_Socket, API_Production_Socket } from '../../actions/globalVar
 const serverEndpoint = `${API_Production_Socket}`
 
   
-function Options ({options}) {
+function Options ({options, disabled, setDisabled}) {
   const dispatch = useDispatch()
   const socket = useSelector(state => state.myReducer.socket)
   const [selectedOption, setSelectedOption] = useState(null)
   const renderHTML = (rawHTML) => React.createElement("span", { dangerouslySetInnerHTML: { __html: rawHTML } });
+
 
   const renderOptions = options.map((option, index) => {
     console.log(index);
@@ -47,6 +48,7 @@ function Options ({options}) {
     }
 
   const handleSubmit = () => {
+        setDisabled(true);
         socket.socket.emit("ready", socket.socket.id)
         dispatch(addAnswer(selectedOption))
     }
@@ -62,7 +64,7 @@ function Options ({options}) {
     <div className="options-section">
       {renderOptions}
       <div class="text-center">
-        <button className="text-center" type='submit' onClick={handleSubmit}>Submit</button>
+        <button className="text-center" type='submit' onClick={handleSubmit} disabled={disabled}>Submit</button>
       </div>
     </div>  
   )

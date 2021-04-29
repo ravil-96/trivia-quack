@@ -59,7 +59,7 @@ const Lobby = () => {
 
   useEffect(() => {
     if (currentPlayers.length > 0 && currentPlayers.every(player => player.ready === true)) {
-      setTimeout(axios.post(`${API_Production}/games/${id}/players/${socket.socket.id}`, Math.random * 3000))
+      setTimeout(() => axios.post(`${API_Production}/games/${id}/players/${socket.socket.id}`, Math.random * 3000))
       history.push(`/game/${id}`)
       dispatch(allNotReady())
     }

@@ -37,6 +37,7 @@ const GameRoom = () => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [theme, setTheme] = useState("theme-planet-1");
+  const [disabled, setDisabled] = useState(false);
 
     useEffect(() => {
         dispatch(getAnswers(id))
@@ -47,8 +48,9 @@ const GameRoom = () => {
         if (currentQuestion < questions.length-1) {
           dispatch(allNotReady())
           setCurrentQuestion(q => q + 1)
+          setDisabled(false);
         } else {
-          setTimeout(axios({
+          setTimeout(() => axios({
             method: 'post',
             url: `${API_Production}/games/${id}/players/${socket.socket.id}/answers`,
             data: answers
@@ -96,7 +98,7 @@ const GameRoom = () => {
                 <h3>QUESTION {currentQuestion+1}</h3>
                 <h1>{renderHTML(questions[currentQuestion].question)}</h1>
               </div>
-              <Options options={questions[currentQuestion].possible_answers}/>
+              <Options options={questions[currentQuestion].possible_answers} disabled={disabled} setDisabled={setDisabled}/>
               {returnPlayer}
             </>
           :
