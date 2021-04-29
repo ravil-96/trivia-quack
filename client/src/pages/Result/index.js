@@ -40,18 +40,17 @@ const Result = () => {
 
       const answersList = results.map((result, i) => {
         return (
-          <div key={i}>
-            <div>{renderHTML(result.question)}</div>
+          <div key={i} className="answer-box">
+            <div className="answer-question">{renderHTML(result.question)}</div>
             <ul>
               {result.all_answers.map((answer, j) => (
                 <li
-                  style={{
-                    background:
-                      answer === result.correct_answer ? "green" : "red",
-                  }}
+                  className={
+                      answer === result.correct_answer ? "answer-correct" : "answer-wrong"
+                  }
                 >
                   {renderHTML(answer)}
-                  <ul>{result.player_answers.filter(c => c.answer === answer).map(d => <li>{d.player}</li>)}</ul>
+                  <ul className="answer-player-list">{result.player_answers.filter(c => c.answer === answer).map(d => <li>{d.player}</li>)}</ul>
                 </li>
               ))}
             </ul>
@@ -114,11 +113,11 @@ const Result = () => {
         <div>{JSON.stringify(error)}</div>
       ) : (
         <>
-          <div class="switch-buttons">
-            <a onClick={handleResult}>
+          <div className="switch-buttons">
+            <a className="switch-left" onClick={handleResult}>
               Results
             </a>
-            <a onClick={handleAnswers}>
+            <a className="switch-right" onClick={handleAnswers}>
               Answers
             </a>
           </div>
@@ -127,7 +126,7 @@ const Result = () => {
             <ScoreView players={scores}/>
           </div>
           <div className={showAnswers ? "answers" : "d-none"}>
-            <div>{answersList}</div>
+            <div className="answer-holder">{answersList}</div>
           </div>     
 
         </>
