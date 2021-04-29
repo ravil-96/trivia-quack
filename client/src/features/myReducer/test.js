@@ -17,10 +17,14 @@ describe('my reducer', () => {
         expect(Object.keys(addFakeSocket)).toContain("socket")
     })
 
-    // it('adds a player to the store when a new player joins the room', () => {
-    //     const addFakePlayer = myReducer(
-    //                             {players: [], answers: []}, { type: '@@INIT' })
-    // })
+    it('adds a player to the store when a new player joins the room', () => {
+        const fakePrevState = {players: [], answers: []};
+        const fakePlayer = [{player: 'hSJes_8fbvdJGSVCAANH', ready: false}];
+        const addFakePlayer = myReducer(
+                                fakePrevState, 
+                                { type: 'ADD_PLAYER', payload: fakePlayer })
+        expect(addFakePlayer).toMatchObject({players: [fakePlayer], answers: []});
+    })
 
     // test('it returns with updated array when a dogs are loaded', () => {
     //     const fakeLoad = doggoReducer(
