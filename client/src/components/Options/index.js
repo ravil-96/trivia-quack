@@ -50,6 +50,7 @@ function Options ({options, disabled, setDisabled}) {
         setDisabled(true);
         socket.socket.emit("ready", socket.socket.id)
         dispatch(addAnswer(selectedOption))
+        setSelectedOption(null);
     }
 
   useEffect(() => {
