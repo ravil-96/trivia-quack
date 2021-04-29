@@ -9,7 +9,7 @@ function JoinRoom () {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        location.href = url;
+        location.href = `lobby/${url}`;
     }
 
     return (
