@@ -1,10 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import { playerReady, addAnswer } from '../../actions'
+import React, {useState} from 'react';
+import { addAnswer } from '../../actions'
 import { useSelector, useDispatch } from 'react-redux'
-import io from 'socket.io-client';
-import { SOCKET_ADDRESS } from '../../actions/globalVars';
-
-const serverEndpoint = `${SOCKET_ADDRESS}`
+import { useSocketReady } from '../../customHooks';
   
 function Options ({options, disabled, setDisabled}) {
   const dispatch = useDispatch()
@@ -33,7 +30,6 @@ function Options ({options, disabled, setDisabled}) {
         break;
     }
 
-    console.log(answerMarker);
     return (
       <button key={index} style={{background: selectedOption === option ? 'green' : null}} onClick={() => handleSelect(option)}>
         <span className="letter">{answerMarker}</span> {renderHTML(option)}
@@ -49,14 +45,10 @@ function Options ({options, disabled, setDisabled}) {
         setDisabled(true);
         socket.socket.emit("ready", socket.socket.id)
         dispatch(addAnswer(selectedOption))
+        setSelectedOption(null);
     }
 
-  useEffect(() => {
-    const socket = io(serverEndpoint);
-    socket.on("player-ready", (socket) => {
-      dispatch(playerReady(socket))
-    });
-  },[])
+  useSocketReady();
 
   return (
     <div className="options-section">
