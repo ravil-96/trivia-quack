@@ -31,7 +31,6 @@ const Result = () => {
             console.log(data.data)
             setLoading(false)
             console.log('This is the data:',data)
-            console.log('questions from reducer: ',qType)
           } catch (err) {
             setLoading(false)
             setError(err)

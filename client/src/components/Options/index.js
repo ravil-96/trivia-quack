@@ -11,6 +11,7 @@ function Options ({options}) {
   const dispatch = useDispatch()
   const socket = useSelector(state => state.myReducer.socket)
   const [selectedOption, setSelectedOption] = useState(null)
+  const renderHTML = (rawHTML) => React.createElement("span", { dangerouslySetInnerHTML: { __html: rawHTML } });
 
   const renderOptions = options.map((option, index) => {
     console.log(index);
@@ -35,7 +36,7 @@ function Options ({options}) {
     console.log(answerMarker);
     return (
       <button key={index} style={{background: selectedOption === option ? 'green' : null}} onClick={() => handleSelect(option)}>
-        <span>{answerMarker}</span> {option}
+        <span className="letter">{answerMarker}</span> {renderHTML(option)}
       </button>
     )
   })
