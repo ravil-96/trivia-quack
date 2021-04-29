@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ScoreView } from '../../components';
 import axios from 'axios'
-import { API_Local, API_Production } from '../../actions/globalVars'
+import { API_ADDRESS } from '../../actions/globalVars';
 
 import icon1 from '../../images/player-1.png';
 import icon2 from '../../images/player-2.png';
@@ -22,7 +22,7 @@ const Highscore = () => {
   const [players, setPlayers] = useState([])
 useEffect(() => {
   async function getScores(){
-  const { data } = await axios.get(`${API_Production}/games/scores`)
+  const { data } = await axios.get(`${API_ADDRESS}/games/scores`)
   const topPlayers = data.scores.sort((a,b) => b.score - a.score).map(p => ({name: p.player, count: p.score}))
   topPlayers.length = 10
   setPlayers(topPlayers)

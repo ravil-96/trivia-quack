@@ -17,7 +17,7 @@ import axios from 'axios';
 
 import { PlayerCard, Options } from '../../components'
 import { getAnswers, allNotReady } from '../../actions'
-import { API_Local, API_Production } from '../../actions/globalVars';
+import { API_ADDRESS } from '../../actions/globalVars';
 
 
 import { playerReady } from '../../actions'
@@ -50,12 +50,13 @@ const GameRoom = () => {
           setCurrentQuestion(q => q + 1)
           setDisabled(false);
         } else {
+          const timeout =  (currentPlayers.findIndex(p => p.player == socket.socket.id) + 1) * 1000
           setTimeout(() => axios({
             method: 'post',
-            url: `${API_Production}/games/${id}/players/${socket.socket.id}/answers`,
+            url: `${API_ADDRESS}/games/${id}/players/${socket.socket.id}/answers`,
             data: answers
-          }), Math.random * 5000);
-          setTimeout(() => history.push(`/results/${id}`),5000)
+          }), timeout);
+          setTimeout(() => history.push(`/results/${id}`), (currentPlayers.length * 1000) + 1000)
         }
       }
     },[currentPlayers])

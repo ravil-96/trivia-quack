@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { ScoreView } from '../../components'
-import { API_Local, API_Production } from '../../actions/globalVars';
+import { API_ADDRESS } from '../../actions/globalVars';
 
 const Result = () => {
 
@@ -24,7 +24,7 @@ const Result = () => {
         async function getResults() {
           try {
             setLoading(true)
-            let { data } = await axios.get(`${API_Production}/games/${id}/results`);
+            let { data } = await axios.get(`${API_ADDRESS}/games/${id}/results`);
             setResults(data.data)
             const scoreSortFix = data.scores.sort((a,b) => b.count - a.count).map(p => ({name: p.name, count: p.count}))
             setScores(scoreSortFix)
