@@ -28,6 +28,11 @@ io.on('connection', socket => {
             io.in(roomId).emit('incoming-message', { username, message });
         })
 
+        socket.on('username', username => {
+             socketArray.find(s => s.id === socket.id).username =  username
+            io.in(roomId).emit('players-in-room', socketArray.filter(s => s.room === roomId))
+        })
+
         //handle ready function
         socket.on('ready', (socketId) => {
             console.log(socketId + " is ready!")
@@ -41,7 +46,7 @@ io.on('connection', socket => {
             socketArray.splice(socketToRemove, 1)
 
             if (io.sockets.adapter.rooms.get(roomId)) {
-                io.to(roomId).emit('players-in-room', socketArray)
+                io.to(roomId).emit('players-in-room', socketArray.filter(s => s.room === roomId))
             }
             // io.to(roomId).emit('admin-message', `${socket.id} has left`)
         });
