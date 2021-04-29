@@ -2,10 +2,9 @@ import React, {useEffect, useState} from 'react';
 import { playerReady, addAnswer } from '../../actions'
 import { useSelector, useDispatch } from 'react-redux'
 import io from 'socket.io-client';
-import { API_Local_Socket, API_Production_Socket } from '../../actions/globalVars';
+import { SOCKET_ADDRESS } from '../../actions/globalVars';
 
-const serverEndpoint = `${API_Production_Socket}`
-
+const serverEndpoint = `${SOCKET_ADDRESS}`
   
 function Options ({options}) {
   const dispatch = useDispatch()
