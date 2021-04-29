@@ -97,30 +97,6 @@ class Game {
     });
   }
 
-//   static addPlayers(id, player) {
-//     return new Promise(async (resolve, reject) => {
-//       try {
-//         const db = await init();
-//         const gameToUpdate = await db
-//           .collection("games")
-//           .findOne({ _id: ObjectId(id) });
-//         console.log(gameToUpdate);
-//         let players = gameToUpdate.players || [];
-//         let newPlayers = players.concat(player);
-//         await db.collection("games").updateOne(
-//           { _id: ObjectId(id) },
-//           {
-//             $set: { players: newPlayers },
-//             $currentDate: { lastModified: true },
-//           }
-//         );
-//         resolve(`inserted player:${player} for game:${id}`);
-//       } catch (err) {
-//         reject(`Error updating answers: ${err.message}`);
-//       }
-//     });
-//   }
-
   static addAnswers(id, player, answers) {
     return new Promise(async (resolve, reject) => {
       try {
