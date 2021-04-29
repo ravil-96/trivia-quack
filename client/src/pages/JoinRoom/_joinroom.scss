@@ -1,0 +1,29 @@
+#lobby {
+  h3 {
+    text-align: center;
+    color: white;
+  }
+}
+
+#join-game-section {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    width: 47vw;
+    height: 300px;
+    border-radius: 50px;
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 27vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#duck {
+  margin-top: 200px
+}
+
+.ready-button:hover {
+  color: white;
+}
