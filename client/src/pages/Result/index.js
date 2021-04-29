@@ -10,7 +10,7 @@ const Result = () => {
     const { id } = useParams()
     const [results, setResults] = useState([])
     const [scores, setScores] = useState([])
-    const [points, setPoints] = useState([])
+    const [points, setPoints] = useState()
     const [loading, setLoading] = useState()
     const [error, setError] = useState(null)
     useEffect(() => {
@@ -20,9 +20,12 @@ const Result = () => {
             let { data } = await axios.get(`http://localhost:3000/games/${id}/results`);
             setResults(data.data)
             setScores(data.scores)
+            setDifficulty(data.difficulty)
             setLoading(false)
-            console.log('This is the data:',data)
-            console.log('questions from reducer: ',qType)
+            console.log('no of Qs:', results.length)
+            console.log('game type: ',qType.type)
+            console.log('The difficulty: ',qType.difficulty)
+            console.log('no of correct ans: ',scores.count)
           } catch (err) {
             setLoading(false)
             setError(err)
@@ -90,9 +93,9 @@ const Result = () => {
         
         return playerPoints
       }
-      pointsCalc()
-      setPoints(playerPoints)
-      
+      // pointsCalc()
+      // setPoints(playerPoints)
+
   return (
     <>
       {loading ? (
