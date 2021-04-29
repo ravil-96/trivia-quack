@@ -58,7 +58,7 @@ const Lobby = () => {
 
   useEffect(() => {
     if (currentPlayers.length > 0 && currentPlayers.every(player => player.ready === true)) {
-      const timeout = (currentPlayers.findIndex(p => p.player == socket.socket.id) + 1) * 100
+      const timeout = (currentPlayers.findIndex(p => p.player == socket.socket.id) + 1) * 1000
       setTimeout(() => axios.post(`${API_ADDRESS}/games/${id}/players/${socket.socket.id}`, timeout))
       history.push(`/game/${id}`)
       dispatch(allNotReady())
