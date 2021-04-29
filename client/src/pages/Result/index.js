@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { ScoreView } from '../../components'
+import { API_Local, API_Production } from '../../actions/globalVars';
 
 const Result = () => {
     //  const socket = useSelector(state => state.myReducer.socket)
@@ -19,7 +20,7 @@ const Result = () => {
         async function getResults() {
           try {
             setLoading(true)
-            let { data } = await axios.get(`http://localhost:3000/games/${id}/results`);
+            let { data } = await axios.get(`${API_Local}/games/${id}/results`);
             setResults(data.data)
             setScores(data.scores)
             console.log(data.scores)
