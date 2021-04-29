@@ -13,57 +13,24 @@ describe('my reducer', () => {
                                     initState,
                                     {type: 'ADD_SOCKET', payload: {socket: fakeSocketObject}}
                             )
-        Object.keys(addFakeSocket)
         expect(Object.keys(addFakeSocket)).toContain("socket")
     })
 
     it('adds a player to the store when a new player joins the room', () => {
-        const fakePrevState = {players: [], answers: []};
-        const fakePlayer = [{player: 'hSJes_8fbvdJGSVCAANH', ready: false}];
+        const fakePlayer = 'hSJes_8fbvdJGSVCAANH';
         const addFakePlayer = myReducer(
-                                fakePrevState, 
-                                { type: 'ADD_PLAYER', payload: fakePlayer })
-        expect(addFakePlayer).toMatchObject({players: [fakePlayer], answers: []});
+                                {players: []}, 
+                                { type: 'ADD_PLAYER', payload: [fakePlayer] })
+        expect(addFakePlayer).toMatchObject({players: [{player: fakePlayer, ready: false}]})
     })
 
-    // test('it returns with updated array when a dogs are loaded', () => {
-    //     const fakeLoad = doggoReducer(
-    //                         { doggos: [] },
-    //                         { type: 'LOAD_DOGGOS', payload: [{ id: 1 }, { id: 2 }]}
-    //                     )
-    //     expect(fakeLoad).toMatchObject({doggos: [
-    //                                 { id: 1 },
-    //                                 { id: 2 }
-    //                             ]})
-    // })
+    it('adds a player\'s answer on submission', () => {
+        const fakeAnswer = "Quebec City";
+        const addFakeAnswer = myReducer(
+                                    {answers: []},
+                                    {type: 'ADD_ANSWER', payload: fakeAnswer}
+                            )
+        expect(addFakeAnswer).toMatchObject({answers: [fakeAnswer]})
+    })
 
-
-    // test('it returns with updated array when a dog is liked', () => {
-    //     const fakeLike = doggoReducer(
-    //                         { doggos: [
-    //                             { id: 1, liked: false },
-    //                             { id: 2, liked: false }
-    //                         ] },
-    //                         { type: 'TOGGLE_LIKE_DOGGO', payload: 1}
-    //                     )
-    //     expect(fakeLike).toMatchObject({ doggos: [
-    //                             { id: 1, liked: true },
-    //                             { id: 2, liked: false }
-    //                         ]})
-    // })
-
-    // test('it returns with updated array when a dog is deleted', () => {
-    //     const fakeDelete = doggoReducer(
-    //                         { doggos: [
-    //                             { id: 1, liked: false },
-    //                             { id: 2, liked: false }
-    //                         ] },
-    //                         { type: 'DELETE_DOGGO', payload: 1}
-    //                     )
-    //     expect(fakeDelete).toMatchObject({
-    //                         doggos: [
-    //                             { id: 2, liked: false }
-    //                         ]
-    //                     })
-    // })
 });
