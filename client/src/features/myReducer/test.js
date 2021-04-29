@@ -24,6 +24,19 @@ describe('my reducer', () => {
         expect(addFakePlayer).toMatchObject({players: [{player: fakePlayer, ready: false}]})
     })
 
+    it('updates an individual player\'s readiness', () => {
+        // Test PLAYER_READY
+    })
+
+    it('resets player readiness and when all players are ready', () => {
+        // Test ALL_NOT_READY
+    })
+
+
+    it('loads questions for the players and puts them in the store', () => {
+        // Think I need to make this one async await and test the fetch request
+    })
+
     it('adds a player\'s answer on submission', () => {
         const fakeAnswer = "Quebec City";
         const addFakeAnswer = myReducer(
