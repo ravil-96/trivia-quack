@@ -17,6 +17,7 @@ import axios from 'axios';
 
 import { PlayerCard, Options } from '../../components'
 import { getAnswers, allNotReady } from '../../actions'
+import { API_Local, API_Production } from '../../actions/globalVars';
 
 
 import { playerReady } from '../../actions'
@@ -45,12 +46,12 @@ const GameRoom = () => {
           dispatch(allNotReady())
           setCurrentQuestion(q => q + 1)
         } else {
-          axios({
+          setTimeout(axios({
             method: 'post',
-            url: `http://localhost:3000/games/${id}/players/${socket.socket.id}/answers`,
+            url: `${API_Production}/games/${id}/players/${socket.socket.id}/answers`,
             data: answers
-          });
-          setTimeout(() => history.push(`/results/${id}`),3000)
+          }), Math.random * 5000);
+          setTimeout(() => history.push(`/results/${id}`),5000)
         }
       }
     },[currentPlayers])

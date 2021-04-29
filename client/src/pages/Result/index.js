@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { ScoreView } from '../../components'
+import { API_Local, API_Production } from '../../actions/globalVars';
 
 const Result = () => {
+
     const socket = useSelector(state => state.myReducer.socket)
     const qType = useSelector(state => state.myReducer.questions[0])
+    //  const socket = useSelector(state => state.myReducer.socket)
     const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
     const { id } = useParams()
     const [results, setResults] = useState([])
@@ -13,14 +17,19 @@ const Result = () => {
     const [points, setPoints] = useState()
     const [loading, setLoading] = useState()
     const [error, setError] = useState(null)
+    const [showResults, setShowResults] = useState(true);
+    const [showAnswers, setAnswersResults] = useState(false);
+
     useEffect(() => {
         async function getResults() {
           try {
             setLoading(true)
-            let { data } = await axios.get(`http://localhost:3000/games/${id}/results`);
+            let { data } = await axios.get(`${API_Production}/games/${id}/results`);
             setResults(data.data)
             setScores(data.scores)
             setDifficulty(data.difficulty)
+            console.log(data.scores)
+            console.log(data.data)
             setLoading(false)
             console.log('no of Qs:', results.length)
             console.log('game type: ',qType.type)
@@ -35,7 +44,8 @@ const Result = () => {
         getResults();
       }, []);
 
-      const scoreList = scores.map((score, i) => <li key={i}>{score.name}{socket.socket.id === score.name ? '(you)' : null} : {score.count}</li>)
+      const scoreSort = scores.sort((a,b) => b.score - a.score)
+      const scoreList = scores.map((score, i) => <li key={i}>{score.name}: {score.count}</li>)
 
       const answersList = results.map((result, i) => {
         return (
@@ -50,7 +60,7 @@ const Result = () => {
                   }}
                 >
                   {renderHTML(answer)}
-                  <ul>{result.player_answers.filter(c => c.answer === answer).map(d => <li>{d.player}{socket.socket.id === d.player ? '(you)' : null}</li>)}</ul>
+                  <ul>{result.player_answers.filter(c => c.answer === answer).map(d => <li>{d.player}</li>)}</ul>
                 </li>
               ))}
             </ul>
@@ -58,62 +68,85 @@ const Result = () => {
         );
       });
       
+      // const pointsCalc = () => {
+      //    // noOfQs * difficult (factor) * game type * correct answers
+      //    // length(data.data) *  *  * data.scores.count
+      //   const noOfQs = results.length
+      //   const difficulty = qType.difficulty
+      //   let diffFactor
+      //   const gameType = qType.type
+      //   let typeFactor
+      //   const correctAns = scores.count
 
-      const pointsCalc = () => {
-         // noOfQs * difficult (factor) * game type * correct answers
-         // length(data.data) *  *  * data.scores.count
-        const noOfQs = results.length
-        const difficulty = qType.difficulty
-        let diffFactor
-        const gameType = qType.type
-        let typeFactor
-        const correctAns = scores.count
-
-        if (gameType === "boolean") {
-          return typeFactor = 1
-        } else if (gameType === "multiple") {
-          return typeFactor = 2
-        }
+      //   if (gameType === "boolean") {
+      //     return typeFactor = 1
+      //   } else if (gameType === "multiple") {
+      //     return typeFactor = 2
+      //   }
         
-        if (difficulty === "easy") {
-          return diffFactor = 1
-        } else if (difficulty === "medium") {
-          return diffFactor = 2
-        } else if (difficulty === "hard") {
-          return diffFactor = 3
-        }
-        // console.log(noOfQs)
-        // console.log(difficulty)
-        // console.log(gameType)
-        // console.log(correctAns)
-        // console.log(diffFactor)
-        // console.log(typeFactor)
+      //   if (difficulty === "easy") {
+      //     return diffFactor = 1
+      //   } else if (difficulty === "medium") {
+      //     return diffFactor = 2
+      //   } else if (difficulty === "hard") {
+      //     return diffFactor = 3
+      //   }
+      //   // console.log(noOfQs)
+      //   // console.log(difficulty)
+      //   // console.log(gameType)
+      //   // console.log(correctAns)
+      //   // console.log(diffFactor)
+      //   // console.log(typeFactor)
        
-        let playerPoints = noOfQs * typeFactor * diffFactor * correctAns
+      //   let playerPoints = noOfQs * typeFactor * diffFactor * correctAns
         
-        return playerPoints
+      //   return playerPoints
+      // }
+      // setPoints(pointsCalc())
+      
+
+      const handleResult = () => {
+        setAnswersResults(false);
+        setShowResults(true);
       }
-      // pointsCalc()
-      // setPoints(playerPoints)
+
+      const handleAnswers = () => {
+        setShowResults(false);
+        setAnswersResults(true);
+      }
 
   return (
-    <>
+    <div id="results" className="container">
       {loading ? (
-        <div>loading...</div>
+        <div>Loading...</div>
       ) : error ? (
         <div>{JSON.stringify(error)}</div>
       ) : (
-        <div style={{color: 'white'}}>
+        <>
+          <div class="switch-buttons">
+            <a onClick={handleResult}>
+              Results
+            </a>
+            <a onClick={handleAnswers}>
+              Answers
+            </a>
+          </div>
+          <div className={showResults ? "scores" : "d-none"}>
             <h1>Results</h1>
             <ul>{scoreList.sort((a,b) => b.score - a.score)}</ul>
+            <ScoreView players={scoreSort}/>
+          </div>
+          <div className={showAnswers ? "answers" : "d-none"}>
             <div>{answersList}</div>
+
             <div>
               <p>{points}</p>
             </div>
-        </div>
-        
+          </div>     
+
+        </>
       )}
-    </>
+    </div>
   );
 };
 

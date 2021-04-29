@@ -21,6 +21,7 @@ describe("integration tests", () => {
         const res = await request(api).get("/games");
         expect(res.statusCode).toEqual(200);
         expect(typeof res.body).toBe("object");
+        expect(res.body.games.length).toBe(1)
       });
   
       it("should return a single game", async () => {
@@ -68,6 +69,13 @@ describe("integration tests", () => {
           ],
         });
       });
+
+      it("should return game info", async () => {
+        const res = await request(api).get("/games/6088064e9a068b002cf601b3/simple");
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toEqual({"category": "Entertainment: Music", "completed": false, "length": 3, "started": false, "type": "multiple"});
+      })
+
   
       it("should return status code 500 error if no game found", async () => {
           const res = await request(api).get("/games/6088064e9a468b002ff601b3");
@@ -80,11 +88,13 @@ describe("integration tests", () => {
       })
   
       it("should add a players answers", async () => {
+          await request(api).post("/games/6088064e9a068b002cf601b3/players/player1");
           const res = await request(api).post("/games/6088064e9a068b002cf601b3/players/player1/answers")
           .send(["Jimmy Page", "Dave Grohl", "Phish"]);
           expect(res.statusCode).toEqual(200);
       })
-  
+      describe("scores routes", () => {
+
       it("should return results for a game", async () => {
           await request(api).post("/games/6088064e9a068b002cf601b3/players/player1");
           await request(api).post("/games/6088064e9a068b002cf601b3/players/player1/answers")
@@ -93,6 +103,29 @@ describe("integration tests", () => {
           expect(res.statusCode).toEqual(200)
           expect(res.body.scores[0]).toEqual({"count": 1, "name": "player1"});
       })
+
+      it("should return results highscores list", async () => {
+        const res = await request(api).get("/games/scores")
+        expect(res.statusCode).toEqual(200)
+        expect(res.body.scores[0].score).toEqual(1);
+    })
+  })
+
+      describe("creating new game", () => {
+
+        it("should post a new game and return the id", async () => {
+        const res = await request(api).post("/games?amount=3&category=9&difficulty=easy&type=boolean")
+        expect(res.statusCode).toEqual(200)
+        expect(res.body.length).toEqual(24)
+    })
+
+    it("should give an error if no questions returned", async () => {
+      const res = await request(api).post("/games?amount=3&category=666")
+      expect(res.statusCode).toEqual(500)
+      expect(res.body.error).toEqual("Error creating game: no questions found, try again")
+    })
+
+    })
   
     });
   });
