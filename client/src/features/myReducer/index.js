@@ -1,4 +1,4 @@
-function myReducer (state = {players: [], answers: []}, action) {
+const myReducer = (state = {players: [], answers: []}, action) => {
     switch (action.type) {
       case 'ADD_SOCKET':
         return ({
@@ -36,11 +36,8 @@ function myReducer (state = {players: [], answers: []}, action) {
           ...state,
           answers: state.answers.concat([action.payload])
         })
-      case 'SET_ERROR' :
+      case 'SET_ERROR':
         return 'error'
-      case 'ADD_MESSAGE':
-        console.log(action.payload)
-        return state
       default:
         return state
     }
