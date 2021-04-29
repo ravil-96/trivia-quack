@@ -45,7 +45,6 @@ const CreateForm = ({ createRoom }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    console.log(e);
     createRoom(amount, category, difficulty, type);
   }
 

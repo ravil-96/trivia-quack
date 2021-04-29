@@ -9,19 +9,9 @@ import { addPlayer, playerReady, addSocket, allNotReady } from '../../actions'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 
-import icon1 from '../../images/player-1.png';
-import icon2 from '../../images/player-2.png';
-import icon3 from '../../images/player-3.png';
-import icon4 from '../../images/player-4.png';
-import icon5 from '../../images/player-5.png';
-import icon6 from '../../images/player-6.png';
-import icon7 from '../../images/player-7.png';
-import icon8 from '../../images/player-8.png';
-import icon9 from '../../images/player-9.png';
-import icon10 from '../../images/player-10.png';
+import { getIcon } from '../../actions/getIcon'
 
 const Lobby = () => {
-  // const [socket, setSocket] = useState(null);
   const [gameInfo, setGameInfo] = useState(null)
 
   const { id } = useParams()
@@ -37,11 +27,9 @@ const Lobby = () => {
   useEffect(() => {
     const socket = io(serverEndpoint);
     dispatch(addSocket({ socket }))
-    // setSocket({ socket });
     socket.emit("create", id);
 
     socket.on("players-in-room", (list) => {
-      console.log(list)
       dispatch(addPlayer(list))
     });
 
@@ -68,19 +56,8 @@ const Lobby = () => {
     socket.socket.emit("ready", socket.socket.id)
   }
 
-  // const fakePlayers = ["123123", "213424", "234234", "234345"];
-  
-  const icons = [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10];
-
-  const returnIcon = () => {
-    let icon = icons[Math.floor(Math.random() * icons.length)];
-    return icon;
-  }
-
-  const readyMarker = false;
-
   const returnPlayer = currentPlayers.map(player => {
-      return <PlayerCard player={player.player} me={player.player === socket.socket.id} icon={returnIcon()} ready={player.ready} />
+      return <PlayerCard player={player.player} me={player.player === socket.socket.id} icon={getIcon()} ready={player.ready} />
   });
 
   return (
@@ -88,9 +65,9 @@ const Lobby = () => {
       {gameInfo && (
         <section style={{color: 'white'}}>
           <p>Category: {gameInfo.category}</p>
-          {/* <p>Difficulty: {gameInfo.difficulty}</p> */}
           <p>Type: {gameInfo.type}</p>
           <p>Length: {gameInfo.length}</p>
+          <p>Game ID: {id}</p>
         </section>
       )}
 
@@ -99,6 +76,7 @@ const Lobby = () => {
           <button onClick={handleReady} className="ready-button">
             Ready Up
           </button>
+          <h3>Copy URL or Game ID to invite more participants</h3>
         </div>
         <div className="col-md-6">
           <h3>Player List:</h3>
