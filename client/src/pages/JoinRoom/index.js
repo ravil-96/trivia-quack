@@ -14,13 +14,18 @@ function JoinRoom () {
 
     return (
     <>
+    <div id="join-game-section">
         <form aria-label="redirect" onSubmit={handleSubmit}>
            <h3>Type game ID here to Join Game</h3>
            <label for="url">Game ID</label>
            <input id='url' aria-label="joinLink" type='text' name="urlInput" placeholder="Type game ID" value={gameId} onChange={handleChange} />
            <input type="submit" value="Join Game"/>
         </form>   
-    </>)
+    </div>
+    <img id="duck" src="https://i.imgur.com/GxgNaPD.png" />
+    <img src=""/>
+    </>
+    )
 
 }
 
