@@ -12,15 +12,11 @@ import icon10 from '../../images/player-10.png';
 import React, { useState, useEffect } from'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import io from 'socket.io-client';
 import axios from 'axios';
 
 import { PlayerCard, Options } from '../../components'
 import { getAnswers, allNotReady } from '../../actions'
 import { API_ADDRESS } from '../../actions/globalVars';
-
-
-import { playerReady } from '../../actions'
 
 
 const GameRoom = () => {
