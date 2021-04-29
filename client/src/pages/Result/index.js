@@ -23,6 +23,9 @@ const Result = () => {
             setLoading(true)
             let { data } = await axios.get(`${API_ADDRESS}/games/${id}/results`);
             setResults(data.data)
+            setScores(data.scores)
+            setDifficulty(data.difficulty)
+            setLoading(false)
             const scoreSortFix = data.scores.sort((a,b) => b.count - a.count).map(p => ({name: p.name, count: p.count}))
             setScores(scoreSortFix)
             setLoading(false)
