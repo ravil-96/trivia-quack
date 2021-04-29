@@ -11,6 +11,7 @@
 
 .theme-planet-1 {
   background-color: rgba(79, 99, 146, 0.5); 
+  z-index: 0;
 
   button {
     background: rgb(15,27,108);
@@ -22,6 +23,7 @@
 
 .theme-planet-2 {
   background-color: rgb(255,60,90,0.5);
+  z-index: 0;
 
   button {
     background: rgb(203,0,105);
@@ -33,11 +35,68 @@
 
 .theme-planet-3 {
   background-color: rgba(78,0,114,0.5);
+  z-index: 0;
 
   button {
     background: rgb(78,0,114);
     background: linear-gradient(0deg, rgba(78,0,114,1) 0%, rgba(177,21,255,1) 100%);
   }
-
   transition: background-color 1s ease;
+}
+
+.planets {
+  height: 200px;
+  img {
+    position: absolute;
+  }
+  .position1 {
+    width: 75px;
+    top: 25px;
+    left: calc(75% - 37.5px);
+    z-index: 2;
+    animation-name: position1-2;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+  .position2 {
+    width: 125px;
+    left: calc(50% - 62.5px);
+    z-index: 3;
+    animation-name: position2-3;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+  .position3 {
+    width: 75px;
+    top: 25px;
+    left: calc(25% - 37.5px);
+    z-index: 1;
+    animation-name: position3-1;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  .animation1 {
+    animation-name: position1-2;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+  }
+}
+
+@keyframes position1-2 {
+  0%   {left: calc(75% - 37.5px); width: 75px}
+  100% {left: calc(50% - 62.5px); width: 125px}
+}
+
+@keyframes position2-3 {
+  0%   {left: calc(50% - 62.5px); width: 125px}
+  100% {left: calc(25% - 37.5px); width: 75px}
+}
+
+@keyframes position3-1 {
+  0%   {left: calc(25% - 37.5px); width: 75px}
+  100% {left: calc(75% - 37.5px); width: 75px}
 }

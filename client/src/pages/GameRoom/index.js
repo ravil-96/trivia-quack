@@ -11,11 +11,19 @@ import { getIcon } from '../../actions/getIcon';
 
 import { useTheme } from '../../customHooks'
 
+import planet1 from '../../images/planet-1.png'
+import planet2 from '../../images/planet-2.png'
+import planet3 from '../../images/planet-3.png'
+
 
 const GameRoom = () => {
   const { id } = useParams()
   const history = useHistory()
   const dispatch = useDispatch()
+
+  const [blueTheme, setBlueTheme] = useState('position1');
+  const [purpleTheme, setPurpleTheme] = useState('position3');
+  const [pinkTheme, setPinkTheme] = useState('position2');
 
   const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
 
@@ -49,6 +57,20 @@ const GameRoom = () => {
     },[currentPlayers])
 
     const setTheme = useTheme(currentQuestion);
+
+    // useEffect(() => {
+    //   let question = currentQuestion;
+    //   if (question % 3 === 2) {
+    //     console.log('Test 3')
+    //     set("theme-planet-3");
+    //   } else if (question % 3 === 1) {
+    //     console.log('Test 2')
+    //     setTheme("theme-planet-2");
+    //   } else {
+    //     console.log('Test 1')
+    //     setTheme("theme-planet-1");
+    //   }
+    // },[currentQuestion])
   
     const returnPlayer = currentPlayers.map((player, index) => {
         return <PlayerCard key={index} player={player.player} me={player.player === socket.socket.id} icon={getIcon()} ready={player.ready} />
@@ -60,7 +82,9 @@ const GameRoom = () => {
         <div class="container">
           <div id="App">Room: {id}</div>
           <div className="planets">
-            
+            <img className={blueTheme} src={planet1} alt="Planet 1" />
+            <img className={pinkTheme} src={planet2} alt="Planet 2" />
+            <img className={purpleTheme} src={planet3} alt="Planet 3" />
           </div>
           { questions ?
             <>
