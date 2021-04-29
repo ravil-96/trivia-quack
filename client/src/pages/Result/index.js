@@ -50,7 +50,7 @@ const Result = () => {
                   }
                 >
                   {renderHTML(answer)}
-                  <ul className="answer-player-list">{result.player_answers.filter(c => c.answer === answer).map(d => <li>{d.player}</li>)}</ul>
+                  <ul className="answer-player-list">{result.player_answers.filter(c => c.answer === answer).map(d => <li>{d.username ? d.username : `Guest-${d.player}`}</li>)}</ul>
                 </li>
               ))}
             </ul>
