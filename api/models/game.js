@@ -115,7 +115,12 @@ class Game {
                       correct: p.answers[i] === r.correct_answer
                     }))
                   }))
+
                 const players = gameToResult.players
+                const difficulty = gameToResult.questions.results[0].difficulty
+                const type = gameToResult.questions.results[0].type
+                const noOfQs = gameToResult.questions.length
+                const score = gameToResult.questions.results[0].score
 
                 function countScore(){
                 let returnCount
@@ -132,7 +137,31 @@ class Game {
                 })
                 return returnCount
                 }
-                 db.collection('scores').insertOne({player: player, score: countScore()})
+
+                function countPoints () {
+                players.filter(p => p === player).forEach( () => {
+                    let typeFactor
+                    let diffFactor
+
+                    if (type === "boolean") {
+                            return typeFactor = 1
+                          } else if (gameType === "multiple") {
+                            return typeFactor = 2
+                          }
+                          
+                    if (difficulty === "easy") {
+                            return diffFactor = 1
+                          } else if (difficulty === "medium") {
+                            return diffFactor = 2
+                          } else if (difficulty === "hard") {
+                            return diffFactor = 3
+                          }
+
+                    let playerPoints = noOfQs * typeFactor * diffFactor * score
+                    return playerPoints 
+                })
+                }
+                 db.collection('scores').insertOne({player: player, score: countScore(), points: countPoints()})
                 resolve('inserted answers')
             } catch (err) {
                 reject(`Error updating answers: ${err.message}`)
