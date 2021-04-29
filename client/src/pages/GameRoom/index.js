@@ -46,7 +46,7 @@ const GameRoom = () => {
           dispatch(allNotReady())
           setCurrentQuestion(q => q + 1)
         } else {
-          setTimeout(axios({
+          setTimeout(() => axios({
             method: 'post',
             url: `${API_ADDRESS}/games/${id}/players/${socket.socket.id}/answers`,
             data: answers
