@@ -26,11 +26,9 @@ const Result = () => {
             setLoading(true)
             let { data } = await axios.get(`${API_Production}/games/${id}/results`);
             setResults(data.data)
-            setScores(data.scores)
-            console.log(data.scores)
-            console.log(data.data)
+            const scoreSortFix = data.scores.sort((a,b) => b.count - a.count).map(p => ({name: p.name, count: p.count}))
+            setScores(scoreSortFix)
             setLoading(false)
-            console.log('This is the data:',data)
           } catch (err) {
             setLoading(false)
             setError(err)
@@ -39,9 +37,6 @@ const Result = () => {
         }
         getResults();
       }, []);
-
-      const scoreSort = scores.sort((a,b) => b.score - a.score)
-      const scoreList = scores.map((score, i) => <li key={i}>{score.name}: {score.count}</li>)
 
       const answersList = results.map((result, i) => {
         return (
@@ -129,8 +124,7 @@ const Result = () => {
           </div>
           <div className={showResults ? "scores" : "d-none"}>
             <h1>Results</h1>
-            <ul>{scoreList.sort((a,b) => b.score - a.score)}</ul>
-            <ScoreView players={scoreSort}/>
+            <ScoreView players={scores}/>
           </div>
           <div className={showAnswers ? "answers" : "d-none"}>
             <div>{answersList}</div>
