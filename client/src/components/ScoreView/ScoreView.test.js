@@ -14,5 +14,4 @@ describe('ScoreView', () => {
     let icon = screen.getByAltText('Player Icon');
     expect(icon).toBeInTheDocument();
   })
-
 })
