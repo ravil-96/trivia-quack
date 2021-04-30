@@ -13,9 +13,9 @@ const Homepage = () => {
       <img className="planet-left" src={planet_left} alt="Blue Planet" />
       <img className="planet-right" src={planet_right} alt="Orange Planet" />
       <div className="text-center">
-      <NewGame />
-      <JoinGame />
-      <HighscoreButton />
+        <NewGame />
+        <JoinGame />
+        <HighscoreButton />
       </div>
     </main>
   );
