@@ -56,7 +56,8 @@ describe("integration tests", () => {
         .send({answers: ["Jimmy Page", "Dave Grohl", "Phish"], icon: "5", username: 'bob'});
           const res = await request(api).get("/games/6088064e9a068b002cf601b3/results")
           expect(res.statusCode).toEqual(200)
-          expect(res.body).toEqual({"count": 1, "name": "1234"});
+          expect(res.body.data.length).toEqual(3);
+          expect(res.body.data[0]).toHaveProperty('player_answers')
       })
 
       it("should return results highscores list", async () => {
@@ -64,8 +65,7 @@ describe("integration tests", () => {
         .send({answers: ["Jimmy Page", "Dave Grohl", "Phish"], icon: "5", username: 'bob'});
         const res = await request(api).get("/games/scores")
         expect(res.statusCode).toEqual(200)
-        expect(res.body.data.length).toBe(3)
-        expect(res.body.scores.length).toBe(3)
+        expect(res.body.scores).toEqual([{"count": 1, "icon": "5", "player": "1234", "points": 200, "username": "bob"}])
     })
   })
 
