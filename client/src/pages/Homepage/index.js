@@ -4,6 +4,7 @@ import planet_left from '../../images/planet-1.png';
 import planet_right from '../../images/planet-2.png';
 
 import { NewGame, JoinGame } from '../../layout';
+import { HighscoreButton } from '../../components';
 
 const Homepage = () => {
   return (
@@ -14,6 +15,7 @@ const Homepage = () => {
       <div className="text-center">
       <NewGame />
       <JoinGame />
+      <HighscoreButton />
       </div>
     </main>
   );
