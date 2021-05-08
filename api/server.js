@@ -1,10 +1,12 @@
-const express = require('express');
+const express = require("express")
 const cors = require('cors');
+const app = express();
+app.use(express.json());
+app.use(cors());
 
-const server = express();
-server.use(cors());
-server.use(express.json());
+app.get('/', (req, res) => res.send("Welcome to the Express server for Trivia Quack!"));
 
-server.get('/', (req, res) => res.send('Welcome'));
+const gamesController = require("./controllers/games")
+app.use('/games', gamesController)
 
-module.exports = server
+module.exports = app;

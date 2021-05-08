@@ -1,0 +1,71 @@
+.scoreview {
+
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+
+  img {
+    width: 100%;
+  }
+
+  span {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 2rem;
+    right: 10px;
+  }
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+}
+
+.first-place {
+  animation: float 6s ease-in-out 4s infinite;
+  span {
+    background-color: gold;
+  }
+}
+
+.second-place {
+  animation: float 6s ease-in-out 2s infinite;
+  margin-top: 50px;
+  span {
+    background-color: silver;
+  }
+}
+
+.third-place {
+  animation: float 6s ease-in-out infinite;
+  margin-top: 100px;
+  span {
+    background-color: brown;
+  }
+}
+
+.table-place {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+
+  h5, p {
+    padding: 0;
+    margin: 0;
+  }
+
+  p {
+    margin-left: 20px;
+  }
+
+  img {
+    width: 50px;
+  }
+
+  span {
+    position:relative;
+  }
+}
